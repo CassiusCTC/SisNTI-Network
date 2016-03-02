@@ -1,0 +1,30 @@
+grupos:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Grupos:index" }
+
+grupos_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Grupos:show" }
+
+grupos_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Grupos:new" }
+
+grupos_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Grupos:create" }
+    requirements: { _method: post }
+
+grupos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Grupos:edit" }
+
+grupos_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Grupos:update" }
+    requirements: { _method: post|put }
+
+grupos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Grupos:delete" }
+    requirements: { _method: post|delete }

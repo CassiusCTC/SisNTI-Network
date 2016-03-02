@@ -1,0 +1,96 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+          <li><a href="{{ path('ipsexcecoes') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Ips Reservados</strong></a></li>
+               
+          </ul>          
+        </div>
+{% endblock col #}
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                       <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('ipsexcecoes') }}">Ip reservados</a>
+                                    </li>
+                                    <li class="active">
+                                         Detalhes Ip reservados
+                                    </li>
+</ol>
+<br>
+<h3>Ip reservados</h3><br/><br/>
+
+<div class="box-content" style="overflow:auto; height:400px">
+    <!--<table class="records_list">-->
+
+    <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+    <thead> <tr> <th colspan="2" style="text-align:center; font-size:25px; color:blue;">Detalhes Ip reservados</th></tr></thead>
+        <tbody>
+           <tr>
+           <th style="text-align:center;">Ips exceções</th>          
+          
+                
+                <td>{{ entity.ipexcecao }}</td>
+
+               
+                
+                
+            </tr>
+        </tbody>
+    </table>
+    <table>
+      <tr>
+      <td style="padding-left: 45px; text-align:center; font-size:18px; color:gray; font-weight: bold ;font-family: Arial;">Ações:</td>
+            <td style="padding-left: 5px;">
+                     <a class="btn btn-primary btn-lg active" href="{{ path('ipsexcecoes_edit', { 'id':      entity.id }) }}"></i>Editar
+                     </a> 
+            
+              <td style="padding-left: 10px;">    
+                            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    </td> 
+                    <td style="padding-left: 35px;">    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                               
+                              </div>
+                              <div class="modal-body">
+                                <div class="alert alert-danger" role="alert">
+                                    <span style="font-size: 18px; font-weight: bold;">Deseja realmente deletar este item!!!</span> Caso sim clique em ok, caso contrario clique em canselar....</div>
+                                </p>
+                              </div>
+                              <div class="modal-footer">
+                              <table>
+                              <tr align="center">
+                               <td> <button type="button" class="btn btn-default btn-lg"     data-dismiss="modal">Cancelar</button>
+                               </td>
+                                <td style="padding-left: 10px;">{{form_start(delete_form) }}
+                                                    
+                                 {{ form_widget (delete_form.submit, {'attr': {'class':'btn btn-danger btn-lg active'}})}}
+
+                                {{form_end(delete_form)}} </td>
+                              </tr>
+                              </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </td> 
+        
+      </tr>
+      
+    </table>
+
+</div>
+
+
+
+{% endblock %}

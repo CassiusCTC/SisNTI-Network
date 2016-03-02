@@ -1,0 +1,23 @@
+Sytem\Bundle\SGBundle\Entity\Grupos:
+    type: entity
+    table: grupos
+    uniqueConstraints:
+        grupo:
+            columns:
+                - grupo
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        grupo:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

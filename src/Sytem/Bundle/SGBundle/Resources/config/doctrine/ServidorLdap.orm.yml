@@ -1,0 +1,39 @@
+Sytem\Bundle\SGBundle\Entity\ServidorLdap:
+    type: entity
+    table: servidor_ldap
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ipLdap:
+            type: string
+            nullable: false
+            length: 15
+            fixed: false
+            comment: ''
+            column: ip_ldap
+        complemento:
+            type: string
+            nullable: false
+            length: 200
+            fixed: false
+            comment: ''
+        username:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        password:
+            type: string
+            nullable: false
+            length: 30
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }

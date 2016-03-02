@@ -1,0 +1,134 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+            </span><span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ path('excecoes') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong> Usuários exceções</strong></a></li>
+              <li><a href="{{ path('admins') }}"> <strong>Usuarios adminstradores</strong></a></li>
+           
+              
+          </ul>
+         
+        </div>
+{% endblock col #}
+
+{% block body -%}
+   <ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('excecoes') }}"> Usuários Especiais</a>
+                                    </li>
+                                    <li class="active">
+                                         Cadastrar Usuários especiais
+                                    </li>
+</ol>
+<br>
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Novo Usuário especial</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio. </strong> </p></div>
+ 
+   
+<div class="form-group">
+    {{ form_start(form) }}
+    <div class="form-group">
+    {% for flashMenssage in app.session.flashbag.get('message1') %}
+      <div class="alert alert-danger" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong><br>
+      </div>
+     {% endfor %}
+        
+        <div  class="col-sm-8">
+     {{ form_errors(form.cpf) }}
+
+        <div class="input-group">
+        <span class="input-group-addon"><b>CPF do usuário (exceção) *</b></span>
+        
+         {{ form_widget (form.cpf,  {'attr': {'class':'form-control','data-mask':'00000000000' ,'placeholder':'00000000000'}} )}}
+          </div>
+          <div id="cpfr"></div>
+          </div>
+           {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+
+           <button class="btn btn-default btn-lg" type="reset">Cancelar</button>
+    {{ form_end(form) }}
+   </div>
+
+  <br/>
+
+</div>
+
+</div></div>
+
+<script type="text/javascript">
+      
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            $('.cpf').mask('000.000.000-00', { reverse: true });
+            $('.cpf').unmask();
+            $('.date').mask('AA:AA:AA:AA:AA:AA', {
+                    onKeyPress: function(str, e, obj){ 
+                        $(obj).val(str.toLowerCase());
+                    }
+               }
+            );
+            $('.phone_with_ddd').mask('(00) 0000-0000');
+        );
+  
+</script> 
+      
+{% endblock %}
+{% block scriptsextra %}
+<script type="text/javascript">
+ $(function () {
+    $("input#sytem_bundle_sgbundle_excecoes_cpf").blur(function(){          
+              
+               
+                        $("#cpfr").html("<img src='{{ asset('bundles/sytemsg/loading/loading1.gif') }}'/>");
+                        var id= $('#sytem_bundle_sgbundle_excecoes_cpf').attr('rel');
+                        //var url = Routing.generate('SytemSGBundle_Solicitacoes_searchCpfuser');
+                        //Pega o valor do usuario atual...
+                        var itens = $('#sytem_bundle_sgbundle_excecoes_cpf').val();
+                        var DATA ='usuario='+itens+'&id='+id;
+                        
+                        //Função ajax
+                        $.ajax({
+                          //Tipo de envio POST ou GET...
+                          type: "POST",
+                          //Caminho do arquivo PHP...
+                          url: "{{ path('searchCpf', { 'flag': 'a' })  }}",
+                          //Arquvios passados via POST neste caso, segue o mesmo modelo para GET...
+                          data: DATA,//{ 'usuario':itens,'id':id },
+                          //Se der tudo ok no envio...
+                          
+                          success: function(resposta){
+                            //Colocar a resposta do aqruivo na div....
+                            $("#cpfr").html(resposta);
+                            //$("#x1").remove();
+                          },
+                          error: function (XMLHttpRequest, textStatus, errorThrown) {             
+                           $("#cpfr").html("error :"+XMLHttpRequest.responseText);
+                          
+                                  
+                          },
+                          complete: function(data){
+                            console.log(data);
+                          
+                          },
+                          
+                        })
+                       //event.preventDefault();
+                      // alert(itens);
+                     
+           });
+  });
+</script>
+{% endblock %}

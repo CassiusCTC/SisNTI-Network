@@ -1,0 +1,61 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+        
+           
+          </ul>
+        
+        </div>
+{% endblock col #}
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                     <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                        
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Configuração servidor LDAP:
+                                    </li>
+                     </ol>
+     
+    <table class="table">
+        <thead>
+           <tr> <td colspan="6"><center><h3><strong> Configuração Servidor Ldap:</strong></h3></center></td></tr>
+            <tr class="info">
+               
+                <th>Ip servidor</th>
+                 <th>Complemento</th>
+                  <th>Username</th>
+                   <th>Passaword</th>
+                   
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+       
+            <tr>
+               
+                <td>{{ entities[0].ipLdap }}</td>
+                <td>{{ entities[0].complemento }}</td>
+                <td>{{ entities[0].username }}</td>
+                <td>******</td>
+                    
+                <td>
+                <ul>
+                    
+                   
+                        <a class="btn btn-success" href="{{ path('servidorldap_edit', { 'id': entities[0].id }) }}">Editar</a>
+                    
+                </ul>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+
+    {% endblock %}

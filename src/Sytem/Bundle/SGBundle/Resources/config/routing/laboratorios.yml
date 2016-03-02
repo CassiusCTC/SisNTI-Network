@@ -1,0 +1,30 @@
+laboratorios:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Laboratorios:index" }
+
+laboratorios_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Laboratorios:show" }
+
+laboratorios_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Laboratorios:new" }
+
+laboratorios_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Laboratorios:create" }
+    requirements: { _method: post }
+
+laboratorios_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Laboratorios:edit" }
+
+laboratorios_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Laboratorios:update" }
+    requirements: { _method: post|put }
+
+laboratorios_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Laboratorios:delete" }
+    requirements: { _method: post|delete }

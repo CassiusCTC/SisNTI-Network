@@ -1,0 +1,76 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>  
+     
+            <li><a href="{{ path('tipos') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Tipos de dispositivos</strong></a></li>
+               
+          </ul>
+         
+</div>
+{% endblock col #}
+
+{% block body -%}
+   <ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador.</a>
+                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('tipos') }}"> Tipos de dispositivos - Ufop</a>
+                                    </li>
+                                    <li class="active">
+                                         Cadastrar Tipos de dispositivos - Ufop
+                                    </li>
+</ol>
+<br>
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Novo Tipo de dispositivo -  Ufop</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.</strong> </p></div>
+
+   
+<div class="form-group">
+    {{ form_start(form) }}
+     <div class="form-group">
+        
+        <div  class="col-sm-10">
+        {{ form_errors(form.descricao) }}
+        <div class="input-group">
+        <span class="input-group-addon"><b>Tipo de dispositivo *</b></span>
+       
+         {{ form_widget (form.descricao,  {'attr': {'class':'form-control'}} )}}
+        </div>
+         </div>   
+      </div>
+           {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+           <button class="btn btn-default btn-lg" type="reset">Cancelar</button>
+    {{ form_end(form) }}
+   </div>
+
+  <br/>
+
+</div></div></div>
+
+<script type="text/javascript">
+      
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            $('.cpf').mask('000.000.000-00', { reverse: true });
+            $('.cpf').unmask();
+            $('.date').mask('AA:AA:AA:AA:AA:AA', {
+                    onKeyPress: function(str, e, obj){ 
+                        $(obj).val(str.toLowerCase());
+                    }
+               }
+            );
+            $('.phone_with_ddd').mask('(00) 0000-0000');
+        );
+  
+</script> 
+      
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'SytemSGBundle:Default:baseSolicitacoes.html.twig' %}
+
+
+
+{# block col %}
+
+{% endblock col #}
+{% block body -%}<br>
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">Home SysNTI - NetManager</a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Solicitações em andamento 
+                                    </li>
+   </ol>
+    
+<br>
+   
+     <h2 class="sub-header" style="text-align:center;">
+     {{ status }}</h2>
+     <br>
+ 
+     <div class="table-responsive">
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+        <div class="alert alert-info" style="text-align: center;"> 
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+  
+      {# total items count #}
+    <div class="count">
+        <h4><strong>Número de solicitações em andamento  </strong> <SPAN STYLE=" font-weight: bold;" class="badge">{{ pagination|length}}</SPAN></h4>
+
+    </div>
+   <br> 
+ <div class="col-xs-12"> 
+    <table id="listar" class="table"  >
+        <thead>
+            <tr class="info">
+                <th >Status</th>
+               
+                <th>Mac</th> 
+                <th> Laboratorio </th>
+
+                <th>Responsavel</th>
+                 <th>Usuário com permissão</th>               
+                 <th >Data Solicitação</th>
+            </tr>
+        </thead>
+        <tbody >
+       
+                {% for entity in pagination %}
+                    <tr class="success"> 
+                      {% if entity.avaliacao == 'não avaliado' %}
+                         
+                         <td class="center" > <h4><span class="label label-warning">Em andamento...</span></h4></td>
+                      {% endif %}
+                       
+
+                      
+                       
+                        <td >{{ entity.mac }}</td>
+                        <td>{{ entity.laboratorio }}</td>
+                        <td >{{ entity.responsavel }}</td>
+                        <td >{{ entity.usuario }}</td>
+                        <td  >
+                          {% if entity.dataSolicitacao %}
+                          {{ entity.dataSolicitacao |date('d-m-Y') }}
+                          {% endif %}
+                        </td>
+                  </tr>   
+                {% endfor %}
+
+        </tbody>
+    </table>
+  
+   </div>
+   </div>
+ </div> 
+                     
+                       
+    <br/>
+
+
+       
+    {% endblock %}
+    {% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+
+
+{% endblock %}

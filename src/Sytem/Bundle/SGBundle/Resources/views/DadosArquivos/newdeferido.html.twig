@@ -1,0 +1,196 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+    <ul class="nav navbar-nav side-nav">
+      <li>
+         <a href="{{ path('homeadmin') }}" style="font-weight:bold;"><i class="fa fa-fw fa-dashboard"></i>  Home Administrador</a>                            
+      </li>                    
+     
+      <li><a href="{{ path('search_solicitacoes') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Status Solicitações</strong></a></li>
+               
+    </ul>
+</div>
+{% endblock col #}
+
+{% block body -%}
+<ol class="breadcrumb">
+                                    <li>
+                                         <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                    </li>
+                                    <li>
+                                          <a href="{{ path('dadosarquivos') }}">Dispositivos da Rede Ufop</a>
+                                    </li>
+                                    <li class="active">
+                                         / Cadastrar maquina
+                                    </li>
+</ol>
+
+
+ 
+    {# form(form) #}
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Cadastro de Maquinas ICEA - Solocitações deferidas </strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.</strong> </p></div>
+ 
+
+
+<div class="table-responsive" >  
+ <div class="row">
+  <div  class="col-sm-12" style="margin:5px px 5px 5px;">
+
+{{form_start(form_r, {'attr': {'class':'form-horizontal'}})}} 
+
+  
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+     
+     <fieldset style=" border: 0px solid grey;padding: 0px;" >
+    
+       
+
+            <p>
+                {% if total >= 3 %}
+                  <h3><span class='label label-danger'> Número de dispositivos gerenciados pelo responsavel -  {{ total }}</span></h3>
+                {% elseif total < 3 %}
+                <h3> <span class='label label-success'> Número de dispositivos gerenciados pelo responsavel - {{ total }}</span></h3>
+                
+                {% endif %}
+
+            </p>
+            <br>
+            <div class="form-group">
+              <div class="col-sm-6">
+               <span style="color:Grey;" >Responsavel pelos dispositivos: (Nome: {{ responsavel.nome }} / Email:  {{ responsavel.email }} ) </span>         
+                {# form_errors(form_r.responsavel) #}
+                 <input class='form-control' value="{{ entity_value.responsavel }}" disabled="false">
+            </div>
+          <div class="col-sm-6">
+           
+            <span style="color:Grey;" >Usuário: (Nome: {{ usuario.nome }} / Email:  {{ usuario.email }} ) </span>         
+                {# form_errors(form_r.usuario) #}
+                 <input class='form-control' value="{{ entity_value.usuario }}" disabled="false">
+          </div>
+
+        </div>
+            
+      
+    <div class="form-group">
+       <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Ip *</b></span> 
+     
+           
+             <span style="color:red;">{{ form_errors(form_r.ip) }} </span>
+              {{ form_widget (form_r.ip, {'attr': {'class':'form-control','data-mask':'099.099.099.099','list':'ips','placeholder':'099.099.099.099'}} )}}
+      </div>
+      </div>
+      <div class="col-sm-6">
+            <div class="input-group">
+            <span class="input-group-addon"><b>MAC *</b></span> 
+             <span style="color:red;">{{ form_errors(form_r.mac) }}</span>
+             <input class="form-control" disabled="true" value="{{ entity_value.mac }}">
+                {{ form_widget (form_r.mac, {'attr': {'class':'form-control', 'value': entity_value.mac ,'style': 'display: none ;' }}  ) }} 
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+       <div class="col-sm-6">
+            <div class="input-group">
+            <span class="input-group-addon"><b>Patrimonio Local</b></span>       
+            {{ form_errors(form_r.patrimonioLocal) }}
+            <input class="form-control" disabled="true" value='externo'>
+            {{ form_widget (form_r.patrimonioLocal, {'attr': {'class':'form-control', 'value': 'externo' , 'style': 'display: none ;'}})}}
+        </div>
+        </div>
+          <div class="col-sm-6">
+            <div class="input-group">
+            <span class="input-group-addon"><b>Laboratorio</b></span>  
+           
+            {{ form_errors(form_r.laboratorio ) }}
+            <input class='form-control' value="{{ entity_value.laboratorio}}" disabled="true">
+            {{ form_widget (form_r.laboratorio, {'attr': {'style': 'display:none' }}  ) }}
+
+         </div>
+         </div>
+         </div>
+   <div class="form-group">
+       <div class="col-sm-6">
+            <div class="input-group">
+            <span class="input-group-addon"><b>Tipo</b></span> 
+            {{ form_errors(form_r.tipo) }}            
+            <input class="form-control" disabled="true" value="{{ entity_value.tipo }}">
+            {{ form_widget (form_r.tipo , {'attr': {'class':'form-control', 'value': entity_value.tipo, 'style': 'display: none ;' }})}}
+        </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+            <span class="input-group-addon"><b>Status</b></span>                   
+            {{ form_errors(form_r.status) }}            
+            {{ form_widget (form_r.status, {'attr': {'class':'form-control'}})}}
+        </div>
+        </div>
+      </div>
+   <div class="form-group">
+       <div class="col-sm-12">
+            <div class="input-group">
+            <span class="input-group-addon"><b>Descrição dispositivo</b></span>                 
+            <textarea class='form-control' style='resize:none' disabled="true">{{ entity_value.descricaoequip }}</textarea>         
+            {{ form_errors(form_r.descricao) }}   
+            {{ form_widget (form_r.descricao  ,{'attr': {'class':'form-control','value': entity_value.descricaoequip , 'style': 'display: none ; resize: none','cols':'5' ,'rows':'40' }}) }}  
+        </div>
+        </div>
+    </div>
+    <p>
+        <div class="alert alert-info">
+          {{ form_errors(form_r.filemove) }}
+          {{ form_widget (form_r.filemove, {'attr': {'class':'form-control', 'value': entity_value.file ,'style': 'display: none ;' }} )}}
+          <label>Download do termo de adesão</label>
+           <a style="color:grey;"href= "{{ path('forcedowload', {'id': entity_value.id, 'flag': 1 }) }}" >Termo_adesao.cpf</a>
+       </p>
+           
+    </div>
+            
+          <br/>
+          {{ form_widget (form_r.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+          <a class="btn btn-default btn-lg" href="{{ path('solicitacoes') }}">Cancelar</a>
+         {#<button class="btn btn-default btn-lg" type="reset">Cancelar</button>#}
+          {{form_end(form_r)}} 
+          </div>
+            </fieldset> 
+</div></div></div></div></div>
+<datalist id="ips">
+{% for e in json %}
+  <option value="{{ e }}"></option>
+ {% endfor %}
+</datalist>
+
+        
+ <script type="text/javascript">
+      
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            $('.date').mask('AA:AA:AA:AA:AA:AA', {
+                    onKeyPress: function(str, e, obj){ 
+                        $(obj).val(str.toLowerCase());
+                    }
+               }
+            );
+            $('.phone_with_ddd').mask('(00) 0000-0000');
+        );
+  
+</script>
+  
+
+{% endblock %}
+

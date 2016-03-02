@@ -1,0 +1,127 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+          
+            <li><a href="{{ path('laboratorios_new') }}"><strong>Cadastrar Laboratorio</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+               
+    </ul>
+         
+         
+</div>
+{% endblock col #}
+
+{% block body -%}
+<ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                       
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Laboratorio Ufop
+                                    </li>
+                                </ol>
+                                
+    
+   
+
+    
+   {#<div class="box-header well" data-original-title="">
+          <ol class="breadcrumb">
+                    <p ><h4 style="padding-left:25px;"> Para adicionar um registro ao Banco de dados clique no botão ao lado:<a class="btn btn-info" href="{{ path('laboratorios_new') }}" style="margin-left:25px;">
+                                <i class="glyphicon glyphicon-plus-sign icon-white"></i>
+                                Add 
+                             </a></h4>
+                    </p>
+
+                    </ol>
+    </div>
+  #} 
+  <br><br>
+  <h3 class="sub-header">Laboratorios</h3>   
+  <div class="form-group"  >
+
+      {% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px; width:900px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+     
+  </div>   
+   <div class="table-responsive">
+    <div class="col-xs-12"><br>
+    <!--<table class="records_list">-->
+    <table class="table" id="listar" style=" font-size:17px;">
+        <thead>
+            <tr class="info">
+                
+                <th>Nome do laboratorio</th>
+                <th>Bloco </th>
+                <th>Sala </th>
+                <th >Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+        {% if entity.nomeLaboratorio != "Dispositivos Externos" %}
+            <tr style="text-align:left">
+                {#]<td><a href="{{ path('laboratorios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>-->#}
+                <td>{{ entity.nomeLaboratorio }}</td>
+                <td>{{ entity.bloco }}</td>
+                <td>{{ entity.sala }}</td>
+             <td>
+              
+                <ul>
+                    
+                        <a class="btn btn-default" href="{{ path('laboratorios_show', { 'id': entity.id }) }}">Detalhes<i class="glyphicon glyphicon-zoom-in icon-white"></i></a>
+                    
+                    
+                    
+                </ul>
+              
+                </td>
+            </tr>
+        {% endif  %}
+        {% endfor %}
+        </tbody>
+    </table>
+     </div>
+    </div></div>
+                  
+    
+    <br/>
+
+        {#<ul>
+        <li>
+            <a href="{{ path('laboratorios_new') }}">
+                Create a new entry
+            </a>
+        </li>
+      </ul>-->#}
+    {% endblock %}
+
+{% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+
+
+{% endblock %}

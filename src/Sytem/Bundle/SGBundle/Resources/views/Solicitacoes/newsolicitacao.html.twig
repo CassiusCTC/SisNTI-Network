@@ -1,0 +1,211 @@
+{% extends 'SytemSGBundle:Default:baseSolicitacoes.html.twig' %}
+
+
+{#block col %}
+
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">Home SysNTI - NetManager </a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Solicitar MAC 
+                                    </li>
+   </ol>
+    
+
+  
+	{# form(form) #}
+<div class="panel panel-primary">
+<div class="panel-heading" style="font-size:18px"><strong>Solicitação de Mac:</strong><br>
+<strong>Solicitante:</strong>  <label>Nome: </label>   <span>{{ user.nome }}.</span> <strong>/</strong> <label>Email: </label>  <span>{{ user.email }}.</span> </div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:14px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.<br>Solicite aqui o cadastro do seu dispositivo ( computador, tablet, nootbook e etc.) para que possa utilizar os serviços disponiveis na rede do ICEA UFOP.</strong> </p>
+   </div>
+<div class='table-responsive'>
+<div class="row">
+ <div  class="col-sm-12" >
+	{{form_start(form, {'attr': {'class':'form-horizontal'}})}} 
+
+   <fieldset style=" border: 0px solid grey;padding: 0px;" >
+          
+      
+       {% for flashMenssage in app.session.flashbag.get('message2') %}
+             <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+               <button  type="button" class="close" data-dismiss="alert">x</button>
+                
+                <strong>{{ flashMenssage }}</strong><br></div>
+          
+          {% endfor %} 
+          {% for flashMenssage in app.session.flashbag.get('message1') %}
+            <div class="alert alert-default" style="text-align: justify; font-size: 15px;"> 
+             <button  type="button" class="close" data-dismiss="alert">x</button>
+               <strong>{{ flashMenssage }}</strong><br>
+            </div>
+           {% endfor %}
+    
+          {% for flashMenssage in app.session.flashbag.get('message') %}
+            <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+                 <button  type="button" class="close" data-dismiss="alert">x</button>
+                  <strong>{{ flashMenssage }}</strong>
+            </div>
+          {% endfor %} 
+            <p>{# form_label(form.responsavel, 'Responsavel  ( Cpf )* :' ,{'label_attr': {'class':'control-label'}}) }}            
+                {{ form_errors(form.responsavel) #}
+            
+            {{ form_widget (form.responsavel ,  {'attr': {'class':'form-control', 'value': entity.responsavel,'style': 'display: none ;' }}  ) }} 
+           </p>
+          
+      <div class="form-group">
+         <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Cpf usuário *</b></span> 
+              <input  class='form-control' name='usuario'  type='text' data-mask='99999999999' placeholder="999999999999" rel="1" id='usuario1'required/>
+            </div>   
+              {#<input class="btn btn-success" type="submit" value="Ok!" id="submit"></span>#}
+              <div id="itenscpf"></div>
+         </div>
+         <div class="col-sm-6">
+          <span style="color:red;">{{ form_errors(form.mac) }}</span> 
+            <div class="input-group">     
+             <span class="input-group-addon"><b>MAC *</b></span>           
+                {{ form_widget (form.mac, {'attr': {'class':'form-control','data-mask':'AA:AA:AA:AA:AA:AA', 'placeholder':'AA:AA:AA:AA:AA:AA'}} )}}
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+         <div class="col-sm-6">
+        <span style="color:red;">{{ form_errors(form.tipo) }}</span>
+         <div class="input-group">  
+          <span class="input-group-addon"><b>Tipo *</b></span>  
+          {{ form_widget (form.tipo , {'attr': {'class':'form-control'}})}}
+        </div>
+      </div>
+        <div class="col-sm-6">
+            {{ form_errors(form.laboratorio) }}  
+            <div class="input-group"> 
+               <span class="input-group-addon"><b>Laboratorio *</b></span>  
+                {{ form_widget (form.laboratorio , {'attr': {'class':'form-control'}})}}
+
+            </div>
+        </div>
+  </div>
+  
+
+  <div class="form-group">
+      <div class="col-sm-6">
+        <span style="color:red;">{{ form_errors(form.descricaoequip) }} </span>
+         <div class="input-group">     
+           <span class="input-group-addon"><b>Descrição*</b></span>
+            {{ form_widget (form.descricaoequip , {'attr': {'class':'form-control','style':'resize: none'}})}}
+        </div>
+      </div>
+      <div class="col-sm-6">     
+         <span style="color:red;">{{ form_errors(form.justificativa) }}</span>    
+          <div class="input-group">     
+           <span class="input-group-addon"><b>Justificativa *</b></span>
+             {{ form_widget (form.justificativa , {'attr': {'class':'form-control','style':'resize: none'}})}}
+          </div>
+      </div>
+  </div>
+
+  <div class="form-group">
+      
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+        <div class="alert alert-info">
+         {{form_label(form.file, 'Upload Termo de Compromisso:' ,{'label_attr': {'class':' control-label'}}) }}
+        
+          {{ form_errors(form.file) }}
+           
+          {{ form_widget (form.file )}}
+          <p class="help-block">Selecione aqui o arquivo preenchido para upload caso não tenha ainda assinado o termo de adesão.</p></p>
+           
+         <p>  <label>Caso não tenha preenchido o Termo de Compromisso acesse o link:  <a href="http://www.nti.ufop.br/images/stories/5-FORM005_2009FormularioParaAutorizacaoCadastroNotebookRede.pdf" style="color:grey"> Termo.pdf</a></label></p>
+       </div>
+    </div>
+  </div>
+            {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+                 <a class="btn btn-danger btn-lg" href="{{ path('useradmin') }}">Cancelar</a>
+          {{form_end(form)}} 
+ </div>
+ </fieldset>
+  </div>
+  </div>
+
+
+</div>
+	</div>
+	
+</div>
+
+
+{% endblock %}
+
+{% block scriptsextra %}
+ 
+<script type="text/javascript">
+     $('#exampleModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          var recipient = button.data('whatever') 
+          var modal = $(this)
+          modal.find('.modal­title').text('Excluir item!!!'+recipient)
+          //modal.find('.modal­body input').val(recipient)
+      });
+</script>
+<script type="text/javascript">
+ $(function () {
+    $("input#usuario1").blur(function(){ 
+             //  if (event.keyCode == 13 || event.whitch == 13 ) {
+                        $("#itenscpf").html("<img src='{{ asset('bundles/sytemsg/loading/loading1.gif') }}'/>");
+                        var id= $('#usuario1').attr('rel');
+                        //var url = Routing.generate('SytemSGBundle_Solicitacoes_searchCpfuser');
+                        //Pega o valor do usuario atual...
+                        var itens = $('#usuario1').val();
+                        var DATA ='usuario='+itens+'&id='+id;
+                        
+                        //Função ajax
+                        $.ajax({
+                          //Tipo de envio POST ou GET...
+                          type: "POST",
+                          //Caminho do arquivo PHP...
+                          url: "{{ path('searchCpfuser') }}",
+                          //Arquvios passados via POST neste caso, segue o mesmo modelo para GET...
+                          data: DATA,//{ 'usuario':itens,'id':id },
+                          //Se der tudo ok no envio...
+                          
+                          success: function(resposta){
+                            //Colocar a resposta do aqruivo na div....
+                            $("#itenscpf").html(resposta);
+                            //$("#x1").remove();
+                          },
+                          error: function (XMLHttpRequest, textStatus, errorThrown) {             
+                           $("#itenscpf").html("error :"+XMLHttpRequest.responseText);
+                          
+                                  
+                          },
+                          complete: function(data){
+                            console.log(data);
+                          
+                          },
+                          
+                        })
+                       //event.preventDefault();
+                      // alert(itens);
+
+                       
+                  //}      
+                        
+                     
+           });
+  });
+            
+</script>
+    
+{% endblock  %}

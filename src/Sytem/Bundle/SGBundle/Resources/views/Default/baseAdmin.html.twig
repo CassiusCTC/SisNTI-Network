@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>{% block title %}SysNTI - NetManager Sistema de apoio a gerencia de Redes no ICEA.{% endblock %}</title>
+        {% block css %}
+         <!--Bootstrap-->
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/bootstrap.css') }}" rel="stylesheet">
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/bootstrap.min.css') }}" rel="stylesheet">
+              
+
+         <!--estrutura-->
+           <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/sb-admin.css') }}" rel="stylesheet">
+            
+
+           <!-- <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/vermelho-theme.css') }}" rel="stylesheet">-->
+            <!--  <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/style.css') }}" rel="stylesheet">-->
+
+
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/jquery.fancybox.css') }}" rel="stylesheet"> 
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/uniform.default.css') }}" rel="stylesheet"> 
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/chosen.css') }}" rel="stylesheet">     
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/DT_bootstrap.css') }}" rel="stylesheet"> 
+
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/font-awesome-4.1.0/css/font-awesome.min.css') }}" rel="stylesheet">
+              <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/uniform.default.css') }}" rel="stylesheet"> 
+               <link href=" {{ asset('bundles/sytemsg/datatable/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+<style type="text/css">
+         .marginBottom-0 {margin-bottom:0;}
+
+        .dropdown-submenu{position:relative;}
+        .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+        .dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+        .dropdown-submenu:hover>a:after{border-left-color:#555;}
+        .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+
+</style>
+
+
+        {% endblock %}
+
+        
+
+          <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+             {% block javascripts1%}
+                <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/html5shiv.js') }}"></script>
+                <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/respond.min.js') }}"></script>
+            {% endblock %}
+          <![endif]-->
+
+    </head>
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+             <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN')  %}
+                    <a class="navbar-brand" href="{{ path('homeadmin') }}">SysNTI - NetManager</a>
+                    <a class="navbar-brand" href="#">Web Master - Data: {{ "now"|date("d/m/Y") }}
+                    </a>  
+
+                  {% elseif is_granted('ROLE_USER') %}
+                    <a class="navbar-brand" href="{{ path('useradmin') }}">SysNTI - NetManager</a>
+
+                  {% else %}
+                    <a class="navbar-brand" href="{{ path('login') }}">SysNTI - NetManager</a>
+                    <a class="nav navbar-brand navbar-right" href="#"> Data: {{ "now"|date("d/m/Y") }}
+                    </a>
+                  {% endif %}
+
+
+                </div>
+               
+
+               {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %} 
+               <ul class="nav navbar-nav navbar-right">  
+               
+                               
+                 <li class="dropdown ">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> Configuração de Acesso <span class="caret"></span></a>
+                      <ul class="dropdown-menu ">
+                      
+                      
+                        <li><a href="{{ path('servidorldap') }}"><i class="glyphicon glyphicon-link"></i> <strong> LDAP</strong></a></li>
+                          <li><a href="{{ path('arquivosremotos') }}"><i class="glyphicon glyphicon-link"></i> <strong>Path dos Arquivos</strong></a></li> 
+                           
+                            <li class="active"><a href="#"><span style="font-weight:bold;">Administrar Usuários</span><span class="sr-only">(current)</span></a></li>
+                          {% if is_granted('ROLE_SUPER_ADMIN') %}
+                           <li><a href="{{ path('configpassword') }}"><i class="glyphicon glyphicon-th-list"></i><strong> Super Administrador</strong></a></li>
+                          {% endif %}  
+                          <li class="divider"></li>
+                         <li class="dropdown dropdown-submenu">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong>Administradores</strong></a>
+                               <ul class="dropdown-menu" style="width:30px">
+                              
+                                  <li><a href="{{ path('admins') }}"><strong>Lista de Admins</strong></a></li>
+                                  <li><a href="{{ path('admins_new') }}"><strong>Administrador</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+
+                             
+                              </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong> Grupos de Usuário</strong></a>
+                               <ul class="dropdown-menu" style="width:30px">
+                              
+                                  <li><a href="{{ path('grupos') }}"><strong> Grupos de Usuários</strong></a></li> 
+                                   <li><a href="{{ path('grupos_new') }}"><strong>Grupo</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+
+                             
+                              </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong> Usuários especiais</strong></a>
+                               <ul class="dropdown-menu" style="width:30px">
+                              
+                                  <li><a href="{{ path('excecoes') }}"><strong>Usuários especiais</strong></a></li>  
+                                  <li><a href="{{ path('excecoes_new') }}"><strong>Usuário Especial</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+
+                             
+                              </ul>
+                        </li>
+                          
+                               
+                              
+                             
+                           
+                      </ul>
+
+                      </li>
+                      <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Exportar / Importar<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                       <li><a href="{{ path('exportar') }}"><strong> Exportar</strong></a></li>
+                            <li> <a href="{{ path('upload') }}" style="font-weight:bold;" >Importar</a> </li>
+                        
+                     </ul>
+                </li>
+                   
+                 <li><a href="{{ path('sair') }}"><i class="fa fa-fw fa-power-off"></i> Sair</a></li>
+
+                        
+                   
+                 </ul>
+
+              {% endif  %}  
+       
+            
+                <!-- Top Menu Items -->
+               
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                  {% block col %}
+         <div class="collapse navbar-collapse navbar-ex1-collapse" >
+
+                    <ul class="nav navbar-nav side-nav">
+
+                        <li>
+                            <a href="{{ path('homeadmin') }}" style="font-weight:bold;"><i class="fa fa-fw fa-dashboard"></i>  Home Administrador</a>                            
+                        </li>
+                        
+                        <li class="active"><a href="#"><span style="font-weight:bold;">Administrar Dispositivos</span><span class="sr-only">(current)</span></a></li>
+                       
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo1" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i>Dispositivos<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo1" class="collapse">
+                                <li><a href="{{ path('dadosarquivos') }}"><i class="glyphicon glyphicon-th-list"></i> <strong>Lista de Dispositivos</strong></a></li>
+                                <li>
+                                    <a href="{{ path('dadosarquivos_new') }}"><strong>Cadastrar Dispositivo</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a>
+                                </li> 
+                                <li class="divider"></li>
+                            </ul>
+                        </li>
+                         <li><a href="{{ path('dhcplogview') }}"><i class="glyphicon glyphicon-th-list"></i>  <strong>Ultimos Acessos</strong></a></li>
+
+                         <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo1c" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i>Requisições de Mac<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo1c" class="collapse">
+                                <li><a href="{{ path('solicitacoes') }}"><i class="glyphicon glyphicon-th-list"></i>  <strong>Novas Requisições</strong></a></li> 
+                                
+                                <li><a href="{{ path('search_solicitacoes') }}"><strong>Status Solicitações </strong>  <i class="glyphicon glyphicon-zoom-in icon-white"></i></a></li>
+                                </li> 
+                                <li class="divider"></li>
+                            </ul>
+                        </li>
+                        
+                         <li class="active"><a href="#"><span style="font-weight:bold;"> <i class="glyphicon glyphicon-cog"></i> Configuração Sistema </a></span><span class="sr-only">(current)</span></a></li>
+                         <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo33" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i> </i> Faixas de IP <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo33" class="collapse">
+                           
+                            <li><a href="{{ path('intervalosips') }}"><i class="glyphicon glyphicon-th-list"></i>  <strong>Lista de Faixas de IP</strong></a></li>
+                             <li><a href="{{ path('intervalosips_new') }}"><strong>Cadastrar Faixa de Ip</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+                            </ul>
+                            
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demox3" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i>  Laboratorios <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demox3" class="collapse">
+                           
+                           <li><a href="{{ path('laboratorios') }}"><i class="glyphicon glyphicon-th-list"></i>  <strong>Lista de Laboratorios</strong></a></li>
+                             <li><a href="{{ path('laboratorios_new') }}"><strong>Cadastrar Laboratorio</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+                            </ul>
+                            
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demox31" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i>  Tipos de dispositivos <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demox31" class="collapse">
+                           
+                           <li><a href="{{ path('tipos') }}"><i class="glyphicon glyphicon-th-list"></i>  <strong> Lista Tipos </strong></a></li>
+                             <li><a href="{{ path('tipos_new') }}"><strong>Cadastrar Tipo</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+                            </ul>
+                            
+                        </li>
+                         <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demox32" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i>  Ips Reservados  <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demox32" class="collapse">
+                           
+                             <li><a href="{{ path('ipsexcecoes') }}"><i class="glyphicon glyphicon-th-list"></i>  <strong> Lista Ips Reservados </strong></a></li>
+                            <li><a href="{{ path('ipsexcecoes_new') }}"><strong>Cadastrar ip reservado</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+                            </ul>
+                            
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demox39" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i>  Dns  <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demox39" class="collapse">
+                           
+                            <li><a href="{{ path('dnsips') }}"><i class="glyphicon glyphicon-th-list"></i> <strong>Lista Dns </strong></a></li>
+                            <li><a href="{{ path('dnsips_new') }}"><strong>Cadastrar Ip DNS</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+                            </ul>
+                            
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demox40" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i>  Subrede<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demox40" class="collapse">
+                           
+                            <li><a href="{{ path('dhcpconf') }}"><i class="glyphicon glyphicon-th-list"></i> <strong>Lista de Subredes</strong></a></li>
+                           <li><a href="{{ path('dhcpconf_new') }}"><strong>Cadastrar Subrede</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+                            </ul>
+                            
+                        </li>
+                        
+                        {#<li>
+                          <a href="javascript:;" data-toggle="collapse" data-target="#demo2" style="font-weight:bold;"><i class="fa fa-fw fa-arrows-v"></i> Administrar Usuarios  <i class="fa fa-fw fa-caret-down"></i></a>
+                           <ul id="demo2" class="collapse">
+                           <li><a href="{{ path('admins') }}"><i class="glyphicon glyphicon-th-list"></i><strong> Administradores</strong></a></li>
+                           <li><a href="{{ path('excecoes') }}"><i class="glyphicon glyphicon-th-list"></i><strong> Usuários Exceções</strong></a></li>  
+                           <li><a href="{{ path('grupos') }}"><i class="glyphicon glyphicon-th-list"></i><strong> Grupos de Usuário</strong></a></li>           
+                          {% if is_granted('ROLE_SUPER_ADMIN') %}
+                           <li><a href="{{ path('configpassword') }}"><i class="glyphicon glyphicon-th-list"></i><strong> Super Administrador</strong></a></li>
+                          {% endif %}
+                           <li class="divider"></li>
+                          </ul>
+                        </li>#}
+
+                         
+                        
+                        
+                       
+                  
+
+              
+                        
+                    </ul>
+     </div>
+                  {% endblock col %} 
+         
+                <!-- /.navbar-collapse -->
+            </nav>
+
+
+        <!--Twig vai carregar os templates dentro da div -->
+            <div id="page-wrapper">
+            <div class="container-fluid">
+                  
+                        <!-- Page Heading -->
+                      
+                    {% block imagem %}
+
+                    {% endblock imagem %}       
+
+                    {% block body %}
+
+
+                    {% endblock body %}
+                    <br><br>    <br><br>    <br><br>
+      <!-- /END THE FEATURETTES -->
+   <hr class="featurette-divider">
+
+      <!-- FOOTER -->
+      <footer>
+       
+        <p class="pull-right"><b>ICEA</b> &copy; 2015 SysNTI - NetManager<br>Cassius Tales Cordeiro</p>
+      </footer><br><br><br><br><br>
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>  </div>
+        <!-- /#wrapper -->
+
+ 
+        {% block javascripts %}
+
+         
+            <!-- jQuery Version 1.11.0 -->
+            <script  type="text/javascript"  src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/jquery-1.11.0.js') }}"></script>
+            
+            <script  src="{{ asset('bundles/sytemsg/ProjetoHome/js/jquery.js') }}"></script>
+            
+           
+        
+        
+            
+            
+         
+            <script src="{{ asset('bundles/sytemsg/ProjetoHome/js/breakpoints.js') }}"></script>
+           
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/bootstrap.min.js') }}" ></script>
+            <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/jquery.blockui.js') }}" ></script>
+            
+            
+            <script src="{{ asset('bundles/sytemsg/jquery/jquery.mask.min.js') }}" ></script>
+
+            <script type='text/javascript'>
+        
+                (function($){
+                      $(document).ready(function(){
+                        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+                          event.preventDefault(); 
+                          event.stopPropagation(); 
+                          $(this).parent().siblings().removeClass('open');
+                          $(this).parent().toggleClass('open');
+                        });
+                      });
+                })(jQuery);
+        
+            </script>
+
+           
+            
+            
+                  {% block scriptsextra %}
+                  {% endblock scriptsextra %}
+        {% endblock %}
+
+    </body>
+</html>

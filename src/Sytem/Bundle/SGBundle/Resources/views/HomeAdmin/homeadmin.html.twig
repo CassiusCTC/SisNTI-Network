@@ -1,0 +1,74 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{% block title %}Home Administrador{% endblock title %}
+
+{# block col
+ 
+       
+{% endblock col #}
+{% block imagem %}
+{% endblock imagem %}
+
+
+{% block body %}<br>
+ <ol class="breadcrumb">
+                                    <li>
+                                     <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                        
+                                    </li>
+                                  
+     </ol>
+
+ <div class="form-group">
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+  </div>
+ <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main" >                 
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">  <i class="glyphicon glyphicon-user"></i> Usuario: <strong>{{ user.nome }}</strong>. Seja Bem Vindo!!!   </h3>
+  </div>
+
+  <div class="panel-body" >
+
+   <div class="table-responsive">
+   <div class="col-sm-12 ">
+   <p style="text-align:center;font-size:16px"><center> <img  width="500" class="img-responsive" src="{{ asset('bundles/sytemsg/images/nt2.bmp') }}"></center></p>
+    <!--<table class="records_list">-->
+    <table class="table">
+          <tr>
+            <th> Nome:</th>
+            <td>{{ user.nome }}</td>
+          </tr>
+       
+          <tr>
+            <th> Email/ Login:</th>
+            <td>{{ user.email }}  </td>
+          </tr>
+        
+          <tr>
+            <th> Tipo:</th>
+            <td> 
+            {% for entity in user.roles %}
+                   {{ entity }}
+            {% endfor %}
+            </td>
+          </tr>
+          
+    </table>
+    </center>
+     </div>
+  </div>
+</div>                
+    </div></div>
+
+</div><br>
+
+
+
+
+{% endblock %}

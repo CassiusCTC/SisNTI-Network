@@ -1,0 +1,30 @@
+dnsips:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Dnsips:index" }
+
+dnsips_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Dnsips:show" }
+
+dnsips_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Dnsips:new" }
+
+dnsips_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Dnsips:create" }
+    requirements: { _method: post }
+
+dnsips_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Dnsips:edit" }
+
+dnsips_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Dnsips:update" }
+    requirements: { _method: post|put }
+
+dnsips_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Dnsips:delete" }
+    requirements: { _method: post|delete }

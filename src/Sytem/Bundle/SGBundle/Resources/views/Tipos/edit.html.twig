@@ -1,0 +1,125 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+          
+            <li><a href="{{ path('tipos') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Tipos</strong></a></li>
+               
+          </ul>
+          
+          
+          
+        </div>
+{% endblock col #}
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('tipos') }}">Tipos de Dispositivos -  Ufop</a>
+                                    </li>
+                                    <li class="active">
+                                         Editar Tipos de Dispositivos Ufop
+                                    </li>
+</ol>
+<br>
+
+   
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Editar Administradores LDAP</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-danger"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio. </strong> </p></div>
+    <div class="form-group">
+
+         {% for flashMenssage in app.session.flashbag.get('message') %}
+          <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+               <button  type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ flashMenssage }}</strong>
+          </div>
+         {% endfor %} 
+       
+    </div>
+       
+        {# form(form) #}
+   <div class="form-group">
+       {{form_start(edit_form, {'attr': {'class':'form-horizontal'}}) }}
+       
+       <div class="form-group">
+          
+            <div  class="col-sm-8">
+            {{ form_errors(edit_form.descricao) }}
+             <div class="input-group">
+              <span class="input-group-addon"><b>Tipo de dispositivo *</b></span>
+                {{ form_widget(edit_form.descricao, {'attr': {'class':'form-control'}} ) }}
+            </div>
+          </div>
+          
+          {% if entity.descricao != 'Descktop' %}
+          <table> 
+            <tr>  
+            <td>{{ form_widget (edit_form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+              {{form_end(edit_form)}}</td> 
+            
+                    <td style="padding-left: 5px;">    
+                            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    </td> 
+                    <td style="padding-left: 35px;">    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                               
+                              </div>
+                              <div class="modal-body">
+                                <div class="alert alert-danger" role="alert">
+                                    <span style="font-size: 18px; font-weight: bold;">Deseja realmente deletar este item?</span> Caso sim clique em ok, caso contrario clique em canselar....</div>
+                                </p>
+                              </div>
+                              <div class="modal-footer">
+                              <table>
+                              <tr align="center">
+                               <td> <button type="button" class="btn btn-default btn-lg"     data-dismiss="modal">Cancelar</button>
+                               </td>
+                                <td style="padding-left: 10px;">{{form_start(delete_form) }}
+                                                    
+                                 {{ form_widget (delete_form.submit, {'attr': {'class':'btn btn-danger btn-lg active'}})}}
+
+                                {{form_end(delete_form)}} </td>
+                              </tr>
+                              </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </td> 
+                </tr>
+                   
+
+          </table> 
+
+              </div>
+
+
+        </div>
+       {% endif %}  
+
+      
+
+      </div>
+
+        </div>
+ </div>
+ {#<ul class="record_actions">
+        
+            <a class="btn btn-default btn-lg " href="{{ path('laboratorios') }}">
+               <i class="glyphicon glyphicon-chevron-left"><strong>Voutar</strong></i> 
+            </a>
+        
+</ul>#}
+{% endblock %}

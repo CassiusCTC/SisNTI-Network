@@ -1,0 +1,136 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{% block title %}Importar{% endblock %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><i class="glyphicon glyphicon-link"></i>  <strong>Home Adiministrador </strong></a></li>  
+           <li> <a href="{{ path('exportar') }}" style="font-weight:bold;"> Exportar</a> </li>
+          
+          </ul>
+</div>
+{% endblock col #}
+{% block imagem %}
+{% autoescape false %}
+    
+{% endautoescape %}
+
+    
+
+
+ 
+{% endblock imagem %}
+
+
+{% block body %}
+<ol class="breadcrumb">
+                                    <li>
+                                     <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                        
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Importar 
+                                    </li>
+     </ol>
+<div class="col-sm-12" >
+ <div class="form-group">
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+  </div>
+                  
+  <div class="panel panel-primary" style="background-color:#E6E6E6">
+  <div class="panel-heading">
+    <h3 class="panel-title">  <strong>Importar tabelas</strong></h3>
+  </div>
+  <div class="panel-body" style="ba">   
+      <div class="alert alert-info" role="alert"><strong><p style="text-align:justify;font-size:16px">Para importar, é necessario indicar a tabela da base de dados e selecionar o arquivo, desta forma a importação ocorrera de um arquivo da extenção CSV. Clique em Importar para que o serviço seja executado.<br>Importante: para o funcionamento correto da importação é importante que o delimitador das colunas seja definido como ';' somente, caso contrário a importação não ocorrera com sucesso..
+      </p>
+      </strong>
+
+   </div>
+   
+   <div class="table-responsive">
+   <div class="col-sm-12 ">  
+   <div style="margin:0px 20px 30px 30px;">
+    
+      <table class='table' style="font-size:15px; background-color:white" border="3">
+       
+          <th class="info">Tabela</th>
+          <th class="info">Formato dos dados para importação</th>
+          <th class="info">Tipo dos campos e tamanho</th>
+       
+        <tbody>
+          <tr >
+              <td><strong> Dnsips </strong></td>
+              <td>ipdns</td>
+              <td class="success">(string) 15</td>
+          </tr>
+          <tr>
+              <td><strong>Laboratorios</strong></td>
+              <td>nomelaboratorio <b>;</b> bloco <b>;</b> sala</td>
+              <td class="success">(string) 100<b>;</b> (string) 100<b>;</b> (string) 50</td>
+          </tr>
+          <tr>
+              <td><strong>Intervalosips</strong></td>
+              <td>intervalo</td>
+              <td class="success">(string) 11</td>
+          </tr>
+          <tr>
+              <td><strong>Grupos</strong></td>
+              <td>grupo</td> 
+              <td class="success">(inteiro)</td>           
+          </tr>
+          <tr>
+              <td><strong>DadosArquivos</strong></td>
+              <td>ip<b>;</b>mac<b>;</b>tipo<b>;</b>patrimoniolocal<b>;</b>laboratorio<b>;</b>responsavel<b>;</b>usuario<b>;</b>descrição</td>
+              <td class="success">(string) 15<b>;</b>(string)17<b>;</b>(string) 50<b>;</b>(string)<b>;</b>(string)<b>;</b>(string) 11<b>;</b>(string) 11<b>;</b>(texto)</td>            
+          </tr>
+        </tbody>
+      </table>
+     </div>
+      <br>
+      <div style="margin:0px 20px 20px 200px;">
+      <div class='form-group'>
+      <form action="{{ path('importar') }}" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="exampleInputFile" style="text-align:justify;font-size:20px">Entre com o arquivo para ser importado:</label><br>
+            <input type="file" name="arquivo" id="arquivo" required>
+            <p class="help-block"><strong>Selecione a o nome da tabela para importar</strong>
+             </p>           
+          </div>
+          <div class="row">
+            <div class="col-sm-5">
+               
+                  <select name="option" class='form-control'>
+                      <option value='Dnsips'>Dns Ips</option>
+                      <option value='DadosArquivos'>Dados Arquivos</option>                     
+                      <option value='Intervalosips'>Intervalos ips</option>                      
+                      <option value='Laboratorios'>Laboratorios</option>
+                      <option value='Grupos'>Grupos de Usuários</option>             
+                  </select>
+            </div>
+          </div>
+         <br> 
+        
+          <button type="submit" class="btn btn-primary"><strong>Importar</strong></button>
+    </form>
+     </div>
+      </div>  
+  </div>
+  </div>
+</div>                
+</div>                
+</div>                
+
+</div>  
+
+
+
+
+{% endblock %}

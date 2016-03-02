@@ -1,0 +1,96 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+         
+            <li><a href="{{ path('ipsexcecoes') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Ips Reservados</strong></a></li>
+               
+          </ul>
+         
+  </div>
+{% endblock col #}
+
+{% block body -%}
+   <ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('ipsexcecoes') }}"> Ip Reservados</a>
+                                    </li>
+                                    <li class="active">
+                                         Cadastrar Ip reservado
+                                    </li>
+</ol>
+<br>
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Novo Ips exceções</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.</strong> </p></div>
+  <div class="form-group">
+
+         {% for flashMenssage in app.session.flashbag.get('message') %}
+          <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+               <button  type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ flashMenssage }}</strong>
+          </div>
+         {% endfor %} 
+       </div>
+   
+<div class="form-group">
+    {{ form_start(form) }}
+     <div class="form-group">
+        
+        <div  class="col-sm-8">
+        {{ form_errors(form.ipexcecao) }}
+
+        <div class="input-group">
+        <span class="input-group-addon"><b>Ip Reservados *</b></span>
+
+         {{ form_widget (form.ipexcecao,  {'attr': {'class':'form-control','list':'ips','data-mask':'099.099.099.099' ,'placeholder':'000.000.000.000'}} )}}
+      </div></div></div>
+        
+         
+          
+          </div>
+           {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+          
+          <button class="btn btn-default btn-lg" type="reset">Cancelar</button>
+    {{ form_end(form) }}
+   </div>
+
+  <br/>
+
+</div></div></div></div>
+</div>
+<datalist id="ips">
+ {% for e in json %} 
+<option value='{{ e }}'></option>
+ {% endfor %}
+</datalist>
+
+
+<script type="text/javascript">
+      
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            $('.cpf').mask('000.000.000-00', { reverse: true });
+            $('.cpf').unmask();
+            $('.date').mask('AA:AA:AA:AA:AA:AA', {
+                    onKeyPress: function(str, e, obj){ 
+                        $(obj).val(str.toLowerCase());
+                    }
+               }
+            );
+            $('.phone_with_ddd').mask('(00) 0000-0000');
+        );
+  
+</script> 
+      
+{% endblock %}

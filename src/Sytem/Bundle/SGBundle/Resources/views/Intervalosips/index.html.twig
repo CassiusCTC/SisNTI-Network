@@ -1,0 +1,98 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+           
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li> 
+            <li><a href="{{ path('intervalosips_new') }}"><strong>Cadastrar Faixa de Ip</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+               
+          </ul>
+          
+  </div>
+{% endblock col #}
+
+{% block body -%}
+                     <ol class="breadcrumb">
+                                    <li>
+                                     <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                        
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Cadastro de faixas de IP :
+                                    </li>
+                     </ol>
+                        
+    
+   
+
+    <h3>
+ 
+<br><h2 class="sub-header">Faixas de IP</h2>
+
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px; width:900px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+
+<div class="table-responsive">
+     <div class="col-xs-12"><br>
+    <table class="table" id="listar">
+        <thead>
+            <tr class="info">
+                
+                <th style="text-align:center">Intervalos de Ips</th>
+                <th style="text-align:center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                
+                <td>{{ entity.intervalo }}</td>
+             <td >
+                <ul>
+                    
+                        <a class="btn btn-default" href="{{ path('intervalosips_edit', { 'id': entity.id }) }}">Detalhes<i class="glyphicon glyphicon-zoom-in icon-white"></i></a>
+                    
+                    
+                       {# <a class="btn btn-info" href="{{ path('intervalosIps_edit', { 'id': entity.id }) }}"><i class="glyphicon glyphicon-edit icon-white"></i>Editar</a>#}
+                    
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+     </div></div>
+                  
+            
+</div>
+   
+        
+
+    {% endblock %}
+{% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+
+
+{% endblock %}

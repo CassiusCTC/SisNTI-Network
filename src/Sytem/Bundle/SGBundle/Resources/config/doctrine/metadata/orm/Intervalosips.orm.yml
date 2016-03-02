@@ -1,0 +1,24 @@
+Intervalosips:
+    type: entity
+    table: intervalosips
+    uniqueConstraints:
+        intervalo:
+            columns:
+                - intervalo
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        intervalo:
+            type: string
+            nullable: false
+            length: 11
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }

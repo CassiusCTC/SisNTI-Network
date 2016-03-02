@@ -1,0 +1,102 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav"> 
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+         
+             <li class="active"><a href="#"><span style="font-weight:bold;">Pesquisa dados da Rede Ufop</span><span class="sr-only">(current)</span></a></li>
+           
+            <li><a href="{{ path('search_desbloqueado') }}"><strong>Status Dispositivos da Rede</strong> </a></li>
+                        
+            <li><a href="{{ path('dadosarquivos') }}"><i class="glyphicon glyphicon-chevron-left"></i><strong>Dados da Rede Ufop</strong> </a></li>
+            
+          </ul>
+</div>
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">SysNTI - NetManager Administrador</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Dados Redes Ufop
+                                    </li>
+   </ol>
+    
+
+    
+        
+        <p>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"> Faça aqui sua Pesquisa: </h3>
+  </div>
+  <div class="panel-body">  
+  
+    <form class="form-inline" method="POST" action="{{ path('search_ip') }}">
+                 <div class="form-group">
+                    <label class="control-label">Busca:
+                    </label>  
+                    
+                        <select class="form-control" name="opcao">               
+                        <option value="2" selected="true">IP</option>           
+                        <option value="1">Mac</option>
+                        <option value="3">Data</option>
+                        <option value="6">Laboratorio</option>
+                    </select>
+                    
+                    
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="busca..." name ="valor" style="width: 240px" required/>
+                    
+                    
+                   
+                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"> Filtrar</i></button>
+                       
+                         <a class="btn btn-info" href="{{ path('search') }}" style="margin-left: 3px;">
+                                <i class="glyphicon glyphicon-refresh"></i>      
+                        </a>
+                   
+                   
+                   </div> 
+                   <br/>
+                    {% for flashMenssage in app.session.flashbag.get('messagem') %}
+                           <div class="alert alert-success" style="text-align: center; font-size: 20px"> 
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>{{ flashMenssage }}</strong>
+                           </div>
+                     {% endfor %}
+                     {% for flashMenssage in app.session.flashbag.get('message1') %}
+                           <div class="alert alert-error" style="text-align: center; font-size: 20px; color: red; float: auto   ;"> 
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>{{ flashMenssage }}</strong>
+                           </div>
+                    {% endfor %}
+               
+      
+                     
+      
+            </form>
+            
+             
+        </p>
+        
+        <br/> 
+
+        </div>
+       </div>
+
+       
+    
+  
+
+       
+ {% endblock %}
+ 

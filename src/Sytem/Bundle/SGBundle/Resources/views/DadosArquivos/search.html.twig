@@ -1,0 +1,126 @@
+{% extends 'SytemSGBundle:Default:baseaAdmin.html.twig' %}
+
+
+
+{# block col %}
+
+
+
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li class="active"><a href="#"><span style="font-weight:bold;"> Home aministrador</span><span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</a></li>               
+          </ul>
+     
+           <ul class="nav nav-sidebar">
+             <li class="active"><a href="#"><span style="font-weight:bold;">Pesquisa dados da Rede Ufop</span><span class="sr-only">(current)</span></a></li>
+           
+            <li><a href="{{ path('search_desbloqueado') }}"><strong>Status Dispositivos</strong>  </a></li>
+           
+
+          </ul>
+          <ul class="nav nav-sidebar">
+           
+                <li class="active"><a href="#"><span style="font-weight:bold;">Dados da Rede Ufop</span><span class="sr-only">(current)</span></a></li>            
+                <li><a href="{{ path('dadosarquivos') }}"><i class="glyphicon glyphicon-chevron-left"></i><strong>Voltar</strong> </a></li>
+            
+          </ul>
+          <ul class="nav nav-sidebar">
+                <li class="active"><a href="#"><span style="font-weight:bold;">DHCPLog</span><span class="sr-only">(current)</span></a></li>            
+                <li><a href="{{ path('dhcplogview') }}"><i class="glyphicon glyphicon-chevron-left"></i><strong>Voltar</strong> </a></li>
+            
+          </ul>
+         
+        </div>
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">SG Admin - NT Ufop-JM.</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Dados Redes Ufop
+                                    </li>
+   </ol>
+    
+
+    
+        
+        <p>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"> Faça aqui sua Pesquisa: </h3>
+  </div>
+  <div class="panel-body">  
+    <!--<table class="records_list">-->
+    <form class="form-search" method="POST" action="{{ path('search_ip') }}">
+                 <div class="form-group">
+                    <label class="col-lg-2 control-label" style="margin-right: -70px">Busca:</label>  
+                    <div class="col-xs-6 col-sm-4">
+                        <select class="form-control" name="opcao">               
+                        <option value="2" selected="true">IP</option>           
+                        <option value="1">Mac</option>
+                        <option value="3">Data</option>
+                        <option value="7">Data DhcpLog</option>
+                        <option value="5">Host name</option>
+                        <option value="6">Laboratorio</option>
+                    </select>
+                    </div>
+                    
+                  </div>
+                  <div class="form-group horizontal">
+                                      
+                    <div class="row">
+
+                    <div class="col-xs-6 col-sm-3">
+                    
+                    <input type="text" class="form-control" placeholder="busca..." name ="valor" style="width: 240px" required/>
+                    </div>
+                    <div class="col-xs-6 col-sm-3" >
+                   
+                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"> Filtrar</i></button>
+                       
+                         <a class="btn btn-info" href="{{ path('search') }}" style="margin-left: 3px;">
+                                <i class="glyphicon glyphicon-refresh"></i>      
+                        </a>
+                    </div>
+                   </div> 
+                   </div> 
+                   <br/>
+                    {% for flashMenssage in app.session.flashbag.get('messagem') %}
+                           <div class="alert alert-success" style="text-align: center; font-size: 20px"> 
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>{{ flashMenssage }}</strong>
+                           </div>
+                     {% endfor %}
+                     {% for flashMenssage in app.session.flashbag.get('message1') %}
+                           <div class="alert alert-error" style="text-align: center; font-size: 20px; color: red; float: auto   ;"> 
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>{{ flashMenssage }}</strong>
+                           </div>
+                    {% endfor %}
+               
+      
+                     
+      
+            </form>
+             
+        </p>
+        
+        <br/> 
+
+        </div>
+       </div>
+
+       
+    
+  
+
+       
+ {% endblock %}
+ 

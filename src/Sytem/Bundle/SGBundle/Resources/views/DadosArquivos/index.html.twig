@@ -1,0 +1,218 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+        <ul class="nav navbar-nav side-nav">
+
+        <li>
+            <a href="{{ path('homeadmin') }}" style="font-weight:bold;"><i class="fa fa-fw fa-dashboard"></i>  Home Administrador</a>                            
+        </li>
+        
+      <li>
+          <a href="{{ path('dadosarquivos_new') }}"><strong>Cadastrar Dispositivo</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a>
+      </li>               
+      <li>
+          <a href="{{ path('search_desbloqueado') }}"><strong>Status Dispositivos da rede</strong></a>
+      </li>
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">SysNTI - NetManager Administrador</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Dispositivos da Redes Ufop
+                                    </li>
+   </ol>
+<ul class="nav nav-pills nav-justified">
+  <li role="presentation4"  class="menu"><a href="{{ path('dadosarquivos') }}"><strong style="font-size:18px;">Todos</strong></a></li>
+  <li role="presentation"  class="menu"><a href="{{ path('search_desbloqueado') }}"><strong style="font-size:18px;">Desbloqueados</strong></a></li>
+  <li role="presentation1" class="menu"><a href="{{ path('search_bloqueado') }}"><strong style="font-size:18px;">Bloqueados</strong></a></li>
+  <li role="presentation2" class="menu"><a href="{{ path('search_externo') }}"><strong style="font-size:18px;">Externos</strong></a></li>
+  <li role="presentation3" class="menu"><a href="{{ path('search_server') }}"><strong style="font-size:18px;">Servidores</strong></a></li>
+</ul>  
+<br><br>
+    
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Progressão do uso das faixas de Ip:</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Progressão do uso das faixas de Ip indica o percentual de uso das faixas em uso com o intuito de melhorar e facilitar a vizualização da quantidade de ip's utilizados na rede.</strong> </p></div>
+      <br/>
+        <div  class="col-xs-10" style="margin:0px 10px 10px 80px;">
+        
+        {% for key, p in porcentagem %}
+       
+            {% set value = (p * 100) / 254 %}
+              {% if p < 50.8 %}  
+                <strong> Faixa de {{ key }}  </strong>
+                     <div class="progress">
+                       <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ value }}%">
+                        <span class="sr-only">{{  (p * 100) / 254 }} % Complete (success)</span>
+                      </div>
+                    </div>
+               {% elseif p > 50.8 and p < 103 %} 
+                <strong> Faixa de {{ entity2.intervalo }} </strong>
+                     <div class="progress">
+                       
+                       <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{{  value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ value }}%">
+                        <span class="sr-only">{{ value }}% Complete (success)</span>
+                      </div>
+                    </div>
+               {% elseif p > 103 and p < 182 %} 
+                  <strong>Faixa de {{ entity2.intervalo }} </strong>
+                     <div class="progress">
+                       <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ value }}%">
+                        <span class="sr-only">{{ value }}% Complete (success)</span>
+                      </div>
+                    </div>
+                {% elseif p > 203.4 %} 
+                  <strong>Faixa de {{ entity2.intervalo }} </strong>
+                     <div class="progress">
+                       <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ value }} %">
+                        <span class="sr-only">{{ value }} % Complete (success)</span>
+                      </div>
+                    </div>
+              
+            {% else %}
+                <strong> Faixa de {{ entity2.intervalo }} </strong>
+                     <div class="progress">
+                       <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 2 ">
+                        <span class="sr-only"> 0 % Complete (success)</span>
+                      </div>
+                    </div>
+
+            {% endif %}
+        
+        
+     {% endfor %}
+     </div>
+   </div>
+    </div>
+  
+  <div class="alert alert-info" style="text-align: lefth;"> 
+                
+   {% for flashMenssage in app.session.flashbag.get('message') %}
+     
+            <strong >{{ flashMenssage }}</strong><br>
+    
+      
+   {% endfor %} 
+   </div>
+  <h2 class="sub-header">Dispositivos da rede</h2>
+  <div class="table-responsive">
+  
+      {# total items count #}
+    <div class="count">
+        <h4><strong>Número de registros</strong> - <SPAN class="badge">{{pagination | length }}</SPAN></h4>
+        <br>
+
+    </div>
+     {#<center><div class="navigation">
+        {{ knp_pagination_filter(pagination, {'a.status': 'Status', 'a.hostname': 'Host Name','a.mac': 'Mac','a.dataCadastro': 'Data Cadastro' }) }}
+    </div></center>#}
+    <table id="listar" class="table"  >
+        <thead>
+            <tr class="info">
+                <!--<th><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>-->
+                 <th >Status</th>
+                <th> Ip </th> 
+                 <th >Mac</th>      
+                <!--<th>Tipo</th>
+                <th>Patrimoniolocal</th>-->
+                
+                <th> Laboratorio </th>
+                <!--<th>Localsala</th>
+                <th>Email</th>
+               
+                <th>Celular</th>-->
+                <th>Responsavel</th>
+                <th >Data cad</th>
+
+                <th > Ações</th>
+            </tr>
+        </thead>
+        <tbody >
+       
+                {% for entity in pagination %}
+                    <tr class="odd gradeX">     
+                      {# <td><a href="{{ path('dadosarquivos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+                      {% if entity.status == 'DESBLOQUEADO' %}
+                         
+                         <td class="center" > <span class="label label-success">{{ entity.status }}</span></td>
+                      {% elseif entity.status == 'BLOQUEADO' %}
+                         
+                        <td class="center" > <span class="label label-danger">{{ entity.status }}</span></td>
+
+                      {% endif %}
+                        <td class="center">{{ entity.ip }}</td>                            
+                        <td class="center">{{ entity.mac }}</td>
+                        <td class="center">{{ entity.laboratorio }}</td>
+                        <td class="center">{{ entity.responsavel }}</td >
+                        <td class="center" >
+                          {% if entity.dataCadastro %}
+                          {{ entity.dataCadastro|date('d-m-Y') }}
+                          {% endif %}
+                        </td>
+                        
+                        <td><a class="btn btn-default" href="{{ path('dadosarquivos_show', { 'id': entity.id }) }}">Detalhes <i class="glyphicon glyphicon-zoom-in icon-white"></i></a></td>                 
+                        {#<td><a class="btn btn-info" href="{{ path('dadosarquivos_edit', { 'id': entity.id }) }}"><i class="glyphicon glyphicon-edit icon-white"></i>Edit</a></td>#}
+                            
+                        
+                    </tr>
+                {% endfor %}
+
+        </tbody>
+    </table>
+    {# display navigation
+    <center><div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div></center> #}
+   </div>  </div>
+   
+
+
+    
+    <br/>
+
+
+       
+    {% endblock %}
+  {% block scriptsextra %}
+  <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px; color:blue;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+
+     <script>
+      $(document).ready(function(){
+
+          $(".menu").click(function(){
+              $(this).addClass("active");
+
+        });
+
+      });
+
+      </script>
+
+
+{% endblock %}

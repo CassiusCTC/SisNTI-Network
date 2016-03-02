@@ -1,0 +1,105 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>
+            <li><a href="{{ path('dnsips_new') }}"><strong>Cadastrar Ip DNS</strong>  <i class="glyphicon glyphicon-plus-sign icon-white"></i></a></li>
+            <li><a href="{{ path('dhcpconf') }}"> <strong>Subnet dhcp</strong></a></li> 
+         </ul> 
+          
+          
+ </div>
+    
+          
+    
+{% endblock col #}
+
+{% block body -%}
+                     <ol class="breadcrumb">
+                                    <li>
+                                     <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                        
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Cadastro de faixas de IP :
+                                    </li>
+                     </ol>
+                        
+    
+   
+
+    <h3>
+
+ 
+
+ <div class="form-group">
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+            <div class="alert alert-info" style="text-align: lefth; font-size: 15px; "> 
+                 <button  type="button" class="close" data-dismiss="alert">x</button>
+                  <strong>{{ flashMenssage }}</strong>
+            </div>
+    {% endfor %}
+    {% for flashMenssage in app.session.flashbag.get('message1') %}
+            <div class="alert alert-info" style="text-align: lefth; font-size: 17px;"> 
+                 <button  type="button" class="close" data-dismiss="alert">x</button>
+                  <strong>{{ flashMenssage }}</strong>
+            </div>
+    {% endfor %} 
+  </div>
+<h3 class="sub-header" style="text-align:center;">Ips DNS</h3>
+<div class="table-responsive">
+
+   <div class="col-xs-12">
+  
+    <table class="table" id="listar">
+        <thead>
+            <tr class="info">
+                
+                <th >Ips DNS DHCP</th>
+                <th width="30%">Ações</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr style="text-align:rigth;">
+               
+                <td>{{ entity.ipdns }}</td>
+                <td width="30%">
+                  <ul>
+                      
+                          <a class="btn btn-success" href="{{ path('dnsips_edit', { 'id': entity.id }) }}">Editar <i class="glyphicon glyphicon-zoom-in icon-white"></i></a>              
+                  </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>     
+ </div>           </div>
+</div>
+              
+
+    {% endblock %}
+ {% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{#block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>  
+            <li><a href="{{ path('excecoes') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Usuários exceções</strong></a></li>
+             <li><a href="{{ path('admins') }}"> <strong>Usuarios adminstradores</strong></a></li>
+           
+            
+          </ul>
+
+          
+          
+          
+        </div>
+{% endblock col #}
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('excecoes') }}">Usuários Especiais</a>
+                                    </li>
+                                    <li class="active">
+                                         Editar Usuários Especiais
+                                    </li>
+</ol>
+<br>
+
+   
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Editar Usuários especiais</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio. </strong> </p></div>
+    <div class="form-group">
+
+         {% for flashMenssage in app.session.flashbag.get('message') %}
+          <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+               <button  type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ flashMenssage }}</strong>
+          </div>
+         {% endfor %} 
+       
+ </div>
+       
+        {# form(form) #}
+   <div class="form-group">
+       {{form_start(edit_form, {'attr': {'class':'form-horizontal'}}) }}
+      <div class="form-group">
+      {% for flashMenssage in app.session.flashbag.get('message1') %}
+      <div class="alert alert-danger" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong><br>
+      </div>
+     {% endfor %}
+        
+        <div  class="col-sm-8">
+        {{ form_errors(edit_form.cpf) }}
+
+        <div class="input-group">
+        <span class="input-group-addon"><b>CPF do usuário especiais *</b></span>
+         
+           
+          {{ form_widget(edit_form.cpf, {'attr': {'class':'form-control','data-mask':'00000000000','placeholder':'00000000000'}} ) }}
+ </div></div>
+        
+      
+          <table> 
+            <tr>  
+            <td >{{ form_widget (edit_form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+              {{form_end(edit_form)}}</td> 
+             
+
+            
+                    <td style="padding-left: 10px;">    
+                            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    </td> 
+                    <td style="padding-left: 35px;">    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                               
+                              </div>
+                              <div class="modal-body">
+                                <div class="alert alert-danger" role="alert">
+                                    <span style="font-size: 18px; font-weight: bold;">Deseja realmente deletar este item?</span> Caso sim clique em ok, caso contrario clique em canselar....</div>
+                                </p>
+                              </div>
+                              <div class="modal-footer">
+                              <table>
+                              <tr align="center">
+                               <td> <button type="button" class="btn btn-default btn-lg"     data-dismiss="modal">Cancelar</button>
+                               </td>
+                                <td style="padding-left: 10px;">{{form_start(delete_form) }}
+                                                    
+                                 {{ form_widget (delete_form.submit, {'attr': {'class':'btn btn-danger btn-lg active'}})}}
+
+                                {{form_end(delete_form)}} </td>
+                              </tr>
+                              </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </td> 
+                </tr>
+                   
+
+          </table>  
+              </div>
+
+
+        </div>
+        
+      <div id="cpfr"></div>
+         </div>
+
+      
+ </div> </div>
+ {#<ul class="record_actions">
+        
+            <a class="btn btn-default btn-lg " href="{{ path('laboratorios') }}">
+               <i class="glyphicon glyphicon-chevron-left"><strong>Voutar</strong></i> 
+            </a>
+        
+</ul>#}
+{% endblock %}
+{% block scriptsextra %}
+<script type="text/javascript">
+ $(function () {
+    $("input#sytem_bundle_sgbundle_excecoes_cpf").blur(function(){          
+              
+               
+                        $("#cpfr").html("<img src='{{ asset('bundles/sytemsg/loading/loading1.gif') }}'/>");
+                        var id= $('#sytem_bundle_sgbundle_excecoes_cpf').attr('rel');
+                        //var url = Routing.generate('SytemSGBundle_Solicitacoes_searchCpfuser');
+                        //Pega o valor do usuario atual...
+                        var itens = $('#sytem_bundle_sgbundle_excecoes_cpf').val();
+                        var DATA ='usuario='+itens+'&id='+id;
+                        
+                        //Função ajax
+                        $.ajax({
+                          //Tipo de envio POST ou GET...
+                          type: "POST",
+                          //Caminho do arquivo PHP...
+                          url: "{{ path('searchCpf', { 'flag': 'a' })  }}",
+                          //Arquvios passados via POST neste caso, segue o mesmo modelo para GET...
+                          data: DATA,//{ 'usuario':itens,'id':id },
+                          //Se der tudo ok no envio...
+                          
+                          success: function(resposta){
+                            //Colocar a resposta do aqruivo na div....
+                            $("#cpfr").html(resposta);
+                            //$("#x1").remove();
+                          },
+                          error: function (XMLHttpRequest, textStatus, errorThrown) {             
+                           $("#cpfr").html("error :"+XMLHttpRequest.responseText);
+                          
+                                  
+                          },
+                          complete: function(data){
+                            console.log(data);
+                          
+                          },
+                          
+                        })
+                       //event.preventDefault();
+                      // alert(itens);
+                     
+           });
+  });
+</script>
+{% endblock %}

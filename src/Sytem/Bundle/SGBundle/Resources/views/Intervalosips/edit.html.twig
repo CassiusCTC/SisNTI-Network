@@ -1,0 +1,150 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>   
+            <li><a href="{{ path('intervalosips') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Faixas de Ips Ufop</strong></a></li>
+               
+    </ul>
+</div>
+{% endblock col#}
+
+{% block body -%}
+<ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                       
+                                    </li>
+                                    <li><a href="{{ path('intervalosips') }}">
+                                         Faixas de IPs </a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> / Editar de faixas de IP :
+                                    </li>
+</ol>
+   
+{#<div class="container">
+#}
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Editar Intervaloes</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio!!! Informe o intervalo de ip sem os ultimos três valores (Ex:200.000.000).</strong> </p></div>
+ 
+   <div class="table-responsive">
+    <div class='row'>
+     <div  class="col-sm-12" style="margin:0px 20px 20px 0px;">
+
+   
+    	 {{form_start(edit_form, {'attr': {'class':'form-horizontal'}}) }}
+     <div class="form-group">
+           {% for flashMenssage in app.session.flashbag.get('message') %}
+            <div class="alert alert-error" style="text-align: center; font-size: 17px; color: green;"> 
+                 <button  type="button" class="close" data-dismiss="alert">x</button>
+                  <strong>{{ flashMenssage }}</strong>
+            </div>
+           {% endfor %} 
+      </div>
+     <div class="form-group">
+        
+        <div  class="col-sm-12">
+        {{ form_errors(edit_form.intervalo) }}
+        <div class="input-group">
+          <span class="input-group-addon"><b>Faixa de Ip *</b></span>
+
+    			{{ form_widget(edit_form.intervalo, {'attr': {'class':'form-control','data-mask':'099.099.099','placeholder':'099.099.099'}}) }}
+     </div>
+     </div>
+     </div>
+      
+        
+         <div class="alert alert-warning"> <p style="font-size: 18px; font-weight: bold;"> <input type="checkbox" name="optionx" value="1" /> Marque essa opção caso queira atualizar todos os Ip's que pertencem ao novo intervalo de ip especificado. </p>  </div>
+          
+        
+
+        <div class="form-group">
+        {#{{ form_label(edit_form.dataCadastro,'Data de Cadastro:' ,{'label_attr': {'class':'col-lg-3 control-label'}}) }}#}
+        <div  class="col-sm-6">
+          {#{{ form_errors(edit_form.dataCadastro) }}
+        
+          {{ form_widget (edit_form.dataCadastro)}}#}
+          
+          {{ form_widget (edit_form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+          {{form_end(edit_form)}}</td> 
+             
+        
+            
+                      
+                <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    
+                      
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                               
+                               
+                              </div>
+                              <div class="modal-body">
+                                <div class="alert alert-danger" role="alert">
+                                    <span style="font-size: 18px; font-weight: bold;">Deseja realmente deletar este item?</span> Caso sim clique em ok, caso contrario clique em canselar....</div>
+                                
+                                    
+                                
+                              </div>
+                              <div class="modal-footer">
+                              <table>
+                                <tr align="center">{{form_start(delete_form) }}
+                                <td colspan="2">
+                                 <div class="alert alert-danger"> <p style="font-size: 18px; font-weight: bold;"> <input type="checkbox" name="option" value="1" /> Marque essa opção caso queira apagar todos os Ip's que pertencem a esse intervalo de ip. </p>  </div>
+                                </td>
+                                </tr> 
+                                <tr align="center">
+                                
+                                 <td> <button type="button" class="btn btn-default btn-lg"     data-dismiss="modal">Cancelar</button>
+                                 </td>
+                            
+                                  <td style="padding-left: 10px;">
+
+                                   {{ form_widget (delete_form.submit, {'attr': {'class':'btn btn-danger btn-lg active'}})}}
+
+                                  {{form_end(delete_form)}} 
+                                  </td>
+                                </tr>
+                              </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </td> 
+                </tr>
+                   
+
+          </table>  
+              </div>
+
+
+        </div>
+        
+
+        
+</div>
+      </div>
+ </div></div>
+</div></div>
+
+
+<script type="text/javascript">
+        
+
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            
+        );
+  
+</script>
+
+{% endblock %}

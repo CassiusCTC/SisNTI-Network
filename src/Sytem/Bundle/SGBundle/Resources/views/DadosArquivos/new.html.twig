@@ -1,0 +1,319 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+    <ul class="nav navbar-nav side-nav">
+      <li>
+         <a href="{{ path('homeadmin') }}" style="font-weight:bold;"><i class="fa fa-fw fa-dashboard"></i>  Home Administrador</a>                            
+      </li>                    
+     
+      <li>
+          <a href="{{ path('dadosarquivos') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Dispositivos da Rede</strong></a>
+      </li>
+               
+    </ul>
+</div>
+{% endblock col #}
+
+{% block body -%}
+
+<ol class="breadcrumb">
+                                    <li>
+                                         <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                    </li>
+                                    <li>
+                                          <a href="{{ path('dadosarquivos') }}">Dados Rede Ufop</a>
+                                    </li>
+                                    <li class="active">
+                                         Cadastrar maquina
+                                    </li>
+</ol>
+
+
+
+	{# form(form) #}
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Cadastro de Maquinas ICEA</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.</strong> </p></div>
+
+{% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong><br>
+      </div>
+{% endfor %} 
+<div class="table-responsive" > 
+ <div class="row" >  
+ <div  class="col-sm-12" style="margin:5px px 5px 0px;">
+{{form_start(form, {'attr': {'class':'form-horizontal'}})}}
+
+
+
+ <fieldset style=" border: 0px solid grey; padding: 0px"> 
+                                                                                       
+       {% for flashMenssage in app.session.flashbag.get('message2') %}
+         <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            
+            <strong>{{ flashMenssage }}</strong><br></div>
+          
+        {% endfor %} 
+       
+        {% for flashMenssage in app.session.flashbag.get('message1') %}
+          <div class="alert alert" style="text-align: justify; font-size: 15px;">
+          <strong>{{ flashMenssage }}</strong><br>
+          </div>
+         {% endfor %} 
+        
+       
+      {# <a class="btn btn-info"  data-toggle="modal" data-target="#exampleModal" data-whatever="Informe o nome do usuário..."> <strong s>Verifique o Cpf</strong></a><br> 
+       <br>#}
+       {% for flashMenssage in app.session.flashbag.get('message1') %}
+          <div class="alert alert-danger" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong><br>
+          </div>
+        {% endfor %} 
+        <div class="form-group">
+         <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Cpf Responsavel *</b></span> 
+              <input name='responsavel' class='form-control' type='text' data-mask='99999999999' placeholder="00000000000" id="usuarior"/>
+              </div>
+              <div id="cpfr"></div>
+          
+          </div>
+          <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Cpf Usuario *:</b></span> 
+              <input  class='form-control' name='usuario' type='text' data-mask='99999999999' placeholder="00000000000" id="usuariou"/>
+                </div>
+              <div id="cpfu"></div>
+          </div>
+        
+          </div>
+	     <div class="form-group">
+       <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Ip *</b></span> 
+              <span style="color:red;">{{ form_errors(form.ip) }} </span>    		
+    			    {{ form_widget (form.ip, {'attr': {'class':'form-control','data-mask':'099.099.099.099','list':'ips','placeholder':'099.099.099.099'}} )}}
+    	  </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Mac *</b></span> 
+              <span style="color:red;">{{ form_errors(form.mac) }} </span>       
+             {{ form_widget (form.mac, {'attr': {'class':'form-control','data-mask':'AA:AA:AA:AA:AA:AA', 'placeholder':'AA:AA:AA:AA:AA:AA'}} )}}
+        </div>
+      </div>
+      
+     </div> 
+     <div class="form-group">
+      <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Patrimonio local</b></span> 
+             {{ form_errors(form.patrimonioLocal) }}        
+             {{ form_widget (form.patrimonioLocal, {'attr': {'class':'form-control'}})}}
+        </div>
+
+      </div>
+      <div class="col-sm-6">    
+          <div class="input-group">
+              <span class="input-group-addon"><b>Laboratorio *</b></span> 
+             {{ form_errors(form.laboratorio) }}        
+            {{ form_widget (form.laboratorio, {'attr': {'class':'form-control'}})}}
+         
+         </div>
+         </div>
+      </div>
+      <div class="form-group">
+       <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Tipo *</b></span> 
+              {{ form_errors(form.tipo) }} 
+              {{ form_widget (form.tipo , {'attr': {'class':'form-control'}})}}
+        </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon"><b>Status *</b></span> 
+              {{ form_errors(form.status) }}            
+              {{ form_widget (form.status, {'attr': {'class':'form-control'}})}}
+        </div>
+      </div>
+     </div> 
+     <div class="form-group">
+       <div class="col-sm-12">		
+          <div class="input-group">
+              <span class="input-group-addon"><b>Descrição *</b></span> 
+             {{ form_errors(form.descricao) }}            
+             {{ form_widget (form.descricao, {'attr': {'class':'form-control','style':'resize:none'}}) }}</p>
+    	   
+     		 </div>
+         </div>
+      </div>
+       <div class="form-group">
+         <div class="col-sm-12">
+         <fieldset style=" border: 1px solid grey;">
+            <div class="input-group">
+            
+             <span class="input-group-addon"><b>Upload Termo de Compromisso *  </b></span>    
+             {{ form_errors(form.filemove) }}           
+             {{ form_widget (form.filemove )}}
+
+          <p class="help-block">Selecione aqui o arquivo preenchido para upload caso não tenha ainda assinado o termo de adesão.<br>
+          Caso não tenha preenchido o Termo de Compromisso acesse o link:  <a href="http://www.nti.ufop.br/images/stories/5-FORM005_2009FormularioParaAutorizacaoCadastroNotebookRede.pdf" style="color:grey"> <span style="color:blue;">Termo.pdf</span></a>
+          </p>
+        
+          </div>
+          </fieldset>
+         </div>
+         </div>
+       
+         {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+         {#<a class="btn btn-default btn-lg" href="{{ path('admins') }}">Cancelar</a>#}
+         <button class="btn btn-default btn-lg" type="reset">Cancelar</button>
+          {{form_end(form)}} 
+
+    		
+   </div>     
+   </div> </div >            
+  </div>      
+          
+
+</fieldset>                                                          
+ </div>	</div>
+	
+
+<datalist id="ips">
+ {% for e in json %} 
+<option value='{{ e }}'></option>
+ {% endfor %}
+</datalist>
+
+{#<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <form method="POST" action="{{ path('searchCpf', { 'flag': 'a' })  }}">
+          <div class="form-group">
+            <p><label for="recipient-name" class="control-label">Infome o CPF (*somente os numeros) para a busca :</label>
+            <input type="text" class="form-control" name="cpfbusca" data-mask="00000000000" placeholder='99999999999'></p>
+            
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
+      </form>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>#}
+
+{% endblock %}
+
+{% block scriptsextra %}
+
+<script type="text/javascript">
+ $(function () {
+    $("input#usuarior").blur(function(){          
+              
+               
+                        $("#cpfr").html("<img src='{{ asset('bundles/sytemsg/loading/loading1.gif') }}'/>");
+                        var id= $('#usuarior').attr('rel');
+                        //var url = Routing.generate('SytemSGBundle_Solicitacoes_searchCpfuser');
+                        //Pega o valor do usuario atual...
+                        var itens = $('#usuarior').val();
+                        var DATA ='usuario='+itens+'&id='+id;
+                        
+                        //Função ajax
+                        $.ajax({
+                          //Tipo de envio POST ou GET...
+                          type: "POST",
+                          //Caminho do arquivo PHP...
+                          url: "{{ path('searchCpf', { 'flag': 'a' })  }}",
+                          //Arquvios passados via POST neste caso, segue o mesmo modelo para GET...
+                          data: DATA,//{ 'usuario':itens,'id':id },
+                          //Se der tudo ok no envio...
+                          
+                          success: function(resposta){
+                            //Colocar a resposta do aqruivo na div....
+                            $("#cpfr").html(resposta);
+                            //$("#x1").remove();
+                          },
+                          error: function (XMLHttpRequest, textStatus, errorThrown) {             
+                           $("#cpfr").html("error :"+XMLHttpRequest.responseText);
+                          
+                                  
+                          },
+                          complete: function(data){
+                            console.log(data);
+                          
+                          },
+                          
+                        })
+                       //event.preventDefault();
+                      // alert(itens);
+                     
+           });
+  });
+
+$(function () {
+    $("input#usuariou").blur(function(){        
+              
+               //if (event.keyCode == 13 || event.whitch == 13 ) {
+                        $("#cpfu").html("<img src='{{ asset('bundles/sytemsg/loading/loading1.gif') }}'/>");
+                        var id= $('#usuariou').attr('rel');
+                        //var url = Routing.generate('SytemSGBundle_Solicitacoes_searchCpfuser');
+                        //Pega o valor do usuario atual...
+                        var itens = $('#usuariou').val();
+                        var DATA ='usuario='+itens+'&id='+id;
+                        
+                        //Função ajax
+                        $.ajax({
+                          //Tipo de envio POST ou GET...
+                          type: "POST",
+                          //Caminho do arquivo PHP...
+                          url: "{{ path('searchCpf', { 'flag': 'a' })  }}",
+                          //Arquvios passados via POST neste caso, segue o mesmo modelo para GET...
+                          data: DATA,//{ 'usuario':itens,'id':id },
+                          //Se der tudo ok no envio...
+                          
+                          success: function(resposta){
+                            //Colocar a resposta do aqruivo na div....
+                            $("#cpfu").html(resposta);
+                            //$("#x1").remove();
+                          },
+                          error: function (XMLHttpRequest, textStatus, errorThrown) {             
+                           $("#cpfu").html("error :"+XMLHttpRequest.responseText);
+                          
+                                  
+                          },
+                          complete: function(data){
+                            console.log(data);
+                          
+                          },
+                          
+                        })
+                       //event.preventDefault();
+                      // alert(itens);
+
+                       
+                 // }      
+                        
+                     
+           });
+  });
+            
+</script>
+    
+{% endblock  %}
+

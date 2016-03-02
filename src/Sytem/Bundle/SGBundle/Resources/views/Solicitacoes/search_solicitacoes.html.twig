@@ -1,0 +1,168 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>  
+
+            <li><a href="{{ path('solicitacoes') }}"><strong>Solicitações não avaliadas</strong>  <i class="glyphicon glyphicon-zoom-in icon-white"></i></a></li>
+            
+            
+          
+          
+         
+    </ul>      
+</div>
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">SysNTI - NetManager Administrador.</a>
+                                    </li>
+                                   
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Status Solicitações
+                                    </li>
+   </ol>
+    
+<br>
+<ul class="nav nav-pills nav-justified">
+  <li role="presentation" class="menu"><a href="{{ path('search_solicitacoes') }}"><strong style="font-size:18px;">Status Deferido</strong></a></li>
+  <li role="presentation" class="menu"><a href="{{ path('search_indeferidos') }}"><strong style="font-size:18px;">Status Indeferido</strong></a></li>
+  <li role="presentation" class="menu"><a href="{{ path('search_notificacoes') }}"><strong style="font-size:18px;">Notificações de Atualização</strong></a></li>
+  <li role="presentation" class="menu"><a href="{{ path('search_apagar') }}"><strong style="font-size:18px;">Notificações de Exclusão</strong></a></li>
+  
+</ul>
+    <br>
+     <h2 class="sub-header" style="text-align:center;">
+     {{ status }}</h2>
+     <br>
+ 
+    <div class="table-responsive">
+    <div class="col-xs-12">
+    <div class="count">
+        <h4><strong>Número de registros</strong> - <SPAN STYLE="color:#00008B; font-weight: bold;">{{ pagination|length }}</SPAN></h4><br>
+
+    </div>
+    {% if var == 3 %}
+            
+             <a class="btn btn-danger" href="{{ path('exclusaoMAC') }}">Apagar Dispositvos solicitados <i class="glyphicon glyphicon-refresh"></i></a><br>
+     {% elseif var == 1 %}
+        <a class="btn btn-info" href="{{ path('atualizaNotificacoes') }}">Atualizar DHCP e ARP <i class="glyphicon glyphicon-refresh"></i></a><br>
+        
+    {% endif  %}
+    <br>
+    <table id="listar" class="table">
+        <thead>
+        
+            <tr class="info">
+                <th>Status</th>
+                <th> Avaliador</th> 
+                 <th> Mac</th> 
+                 
+                <th> Responsavel</th>
+
+                <th>Usuário</th>
+
+                <th> Data cad</th>
+       {% if var not in [1,3] %}
+                <th> Ações</th>
+       {% endif %}
+            </tr>
+        </thead>
+        <tbody >
+       
+                {% for entity in pagination %}
+                   <tr class="odd gradeX">     
+                        {# <td><a href="{{ path('dadosarquivos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+                      {% if entity.avaliacao == 'DEFERIDO' %}
+                         
+                         <td class="odd gradeX" > <h4><span class="label label-success">{{ entity.avaliacao }}</span></h4></td>
+                      {% elseif entity.avaliacao == 'INDEFERIDO'%}
+                        
+                        <td class="odd gradeX" > <h4><span class="label label-danger">{{ entity.avaliacao }}</span></h4></td>
+                      {% elseif entity.avaliacao == 'ATUALIZADO'%}
+                         
+                        <td class="odd gradeX" > <h4><span class="label label-warning">{{ entity.avaliacao }}</span></h4></td>
+                      {% elseif entity.avaliacao == 'APAGAR'%}
+                         
+                        <td class="odd gradeX" > <h4><span class="label label-warning">{{ entity.avaliacao }}</span></h4></td>
+
+                      {% endif %}
+                        <td class="center">{{ entity.respaval }}</td>
+                        <td class="center">{{ entity.mac }}</td>
+                        <td class="center">{{ entity.responsavel }}</td>
+                        <td class="center">{{ entity.usuario }}</td>
+                         
+                        <td class="center" >
+                          {% if entity.dataSolicitacao %}
+
+                          {{ entity.dataSolicitacao|date('d-m-Y') }}
+                          {% endif %}
+                        </td>
+                        {% if entity.avaliacao not in ['APAGAR', 'ATUALIZADO']%}
+                         <td><a class="btn btn-default" href="{{ path('solicitacoes_view', { 'id': entity.id }) }}">Detalhes <i class="glyphicon glyphicon-zoom-in icon-white"></i></a></td>
+
+                        {% endif %}
+                        
+                       
+                            
+                        
+                    </tr>
+                {% endfor %}
+
+        </tbody>
+    </table>
+   
+   </div>
+   </div>
+    </div>  
+      
+
+
+    
+    <br/>
+
+
+       
+    {% endblock %}
+
+{% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+       <script>
+      $(document).ready(function(){
+
+          $(".menu").click(function(){
+              $(this).addClass("active");
+
+        });
+
+      });
+
+      </script>
+
+
+{% endblock %}

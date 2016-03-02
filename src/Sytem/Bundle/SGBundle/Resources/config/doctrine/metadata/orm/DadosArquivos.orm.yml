@@ -1,0 +1,123 @@
+DadosArquivos:
+    type: entity
+    table: dados_arquivos
+    indexes:
+        laboratorio_id:
+            columns:
+                - laboratorio_id
+        responsavel:
+            columns:
+                - responsavel
+        usuario:
+            columns:
+                - usuario
+        tipo:
+            columns:
+                - tipo
+    uniqueConstraints:
+        ip:
+            columns:
+                - ip
+        mac:
+            columns:
+                - mac
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ip:
+            type: string
+            nullable: false
+            length: 15
+            fixed: false
+            comment: ''
+        mac:
+            type: string
+            nullable: false
+            length: 17
+            fixed: false
+            comment: ''
+        patrimonioLocal:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+            column: patrimonio_local
+        dataCadastro:
+            type: date
+            nullable: false
+            comment: ''
+            column: data_cadastro
+        statusdhcp:
+            type: string
+            nullable: true
+            length: 30
+            fixed: false
+            comment: ''
+        datadhcplog:
+            type: date
+            nullable: false
+            comment: ''
+        status:
+            type: string
+            nullable: false
+            length: 15
+            fixed: false
+            comment: ''
+        descricao:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        file:
+            type: string
+            nullable: true
+            length: 600
+            fixed: false
+            comment: ''
+    manyToOne:
+        responsavel:
+            targetEntity: Usuariosystem
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                responsavel:
+                    referencedColumnName: id
+            orphanRemoval: false
+        usuario:
+            targetEntity: Usuariosystem
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tipo:
+            targetEntity: Tipos
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipo:
+                    referencedColumnName: id
+            orphanRemoval: false
+        laboratorio:
+            targetEntity: Laboratorios
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                laboratorio_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,263 @@
+{% extends 'SytemSGBundle:Default:baseSolicitacoes.html.twig' %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('search_user') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Gerenciar Mac</strong></a></li>
+               
+     </ul>
+          
+  </div>
+{% endblock col#}
+
+
+
+{% block body -%}
+<ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="{{ path('useradmin') }}">SysNTI - NetManager</a>
+                                    </li>
+                                    <li>
+                                         <a href="{{ path('search_user') }}">Aministrar Macs user</a>
+                                    </li>
+                                    <li class="active">
+                                        / Editar Cadastro
+                                    </li>
+</ol>
+
+
+<!--<div class="container">-->
+
+	 
+		{# form(form) #}
+<div class="panel panel-primary">
+<div class="panel-heading" style="font-size:18px"><strong>Editar Cadastro</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.</strong> </p>
+   </div>
+  
+  <div class="table-responsive" >  
+   <div class="row">
+  <div  class="col-sm-12" style="margin:0px 0px 0px 0px;">
+
+
+   
+    {{form_start(edit_form_user,{ 'enctype':'multipart/form-data'},{'attr': {'class':'form-horizontal'}}) }}
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+        <div class="alert alert-info" style="text-align: center;"> 
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+   
+    <div class="form-group">
+         <div class="col-sm-6">
+            <div class="input-group">      
+             <span class="input-group-addon"><b>Cpf  Responsavel*</b></span> 
+             <input value="{{ entity.responsavel }}" class='form-control' type='text' data-mask='99999999999' placeholder="00000000000" disabled="true" />
+         </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group">   
+        <span class="input-group-addon"><b> Cpf usuário *</b></span>
+         <input name='usuario' value="{{ entity.usuario }}" class='form-control'  type='text'   data-mask='99999999999' placeholder="0000000000" id="usuario1" required autofocus/>
+          <div id="x1"></div>
+        </div>
+        <div id="itenscpf"></div>
+     </div>   
+  </div>
+ 
+ <div class="form-group">
+      <div class="col-sm-6">
+          {{ form_errors(edit_form_user.ip) }}
+            <div class="input-group"> 
+             <span class="input-group-addon"><b>IP *</b></span>  
+             <input class="form-control" disabled="true" value="{{ entity.ip  }}">
+             {{ form_widget (edit_form_user.ip, {'attr': {'class':'form-control','data-mask':'099.099.099.099','list':'ips','placeholder':'099.099.099.099', 'value': entity.ip ,'style': 'display: none ;'}} )}}
+         </div>
+      </div>
+
+      <div class="col-sm-6">
+      <span style="color:red;">{{ form_errors(edit_form_user.mac) }}</span> 
+        <div class="input-group">   
+         <span class="input-group-addon"><b>MAC *</b></span>  
+          {{ form_widget (edit_form_user.mac, {'attr': {'class':'form-control','data-mask':'AA:AA:AA:AA:AA:AA', 'placeholder':'AA:AA:AA:AA:AA:AA'}})}}
+   </div>
+  </div> 
+</div><br>
+<div class="form-group">
+   <div class="col-sm-6">  
+   {{ form_errors(edit_form_user.laboratorio) }}     
+     <div class="input-group"> 
+             <span class="input-group-addon"><b>Laboratório *</b></span> 
+              {{ form_widget (edit_form_user.laboratorio, {'attr': {'class':'form-control'}})}} 
+    </div>
+  </div>
+<div class="col-sm-6"> 
+ <div class="input-group">
+ <span class="input-group-addon"><b>Localização do Laboratório *</b></span> 
+    <input class="form-control" disabled="true" value="  {{ laboratorio.bloco }} / {{ laboratorio.sala }}"> 
+      
+</div></div></div><br>
+
+<div class="form-group">
+   <div class="col-sm-6">  
+   {{ form_errors(edit_form_user.tipo) }}    
+     <div class="input-group"> 
+             <span class="input-group-addon"><b>Tipo *</b></span> 
+              {{ form_widget (edit_form_user.tipo , {'attr': {'class':'form-control'}})}}
+    </div>
+  </div>
+
+   <div class="col-sm-6"> 
+    {{ form_errors(edit_form_user.patrimonioLocal) }}  
+     <div class="input-group"> 
+     <span class="input-group-addon"><b>Patrimonio Local *</b></span>
+     <input class="form-control" disabled="true" value="{{ entity.patrimonioLocal  }}">       
+        {{ form_widget (edit_form_user.patrimonioLocal, {'attr': {'class':'form-control', 'value': entity.patrimonioLocal,'style': 'display: none ;'}})}}
+
+ </div></div></div>
+ <div class="form-group">
+   <div class="col-sm-12">  
+    {{ form_errors( edit_form_user.status) }}  
+     <div class="input-group"> 
+             <span class="input-group-addon"><b>Status *</b></span>
+       <input class="form-control" disabled="true" value="{{ entity.status  }}">        
+        {{ form_widget (edit_form_user.status, {'attr': {'class':'form-control','value': entity.status ,'style': 'display: none ;'}})}}
+     </div></div></div>
+<div class="form-group">
+   <div class="col-sm-12">
+   {{ form_errors(edit_form_user.descricao) }}   
+     <div class="input-group"> 
+        <span class="input-group-addon"><b>Descrição dispositivo *</b></span>
+        {{ form_widget (edit_form_user.descricao, {'attr': {'class':'form-control', 'style':'resize:none'}}) }}
+
+    </div></div></div>
+     <br>
+<div class="form-group" >
+  <div class="col-sm-12">
+    <div class="alert alert-info">
+          
+         {{form_label(edit_form_user.filemove, 'Upload Termo de Compromisso:' ,{'label_attr': {'class':' control-label'}}) }}
+        
+          {{ form_errors(edit_form_user.filemove ) }}
+           
+          {{ form_widget (edit_form_user.filemove )}}
+          <p class="help-block">Selecione aqui o arquivo preenchido para upload caso não tenha ainda assinado o termo de adesão.</p>
+           
+         <p>  <label>Caso não tenha preenchido o Termo de Compromisso acesse o link:  <a href="http://www.nti.ufop.br/images/stories/5-FORM005_2009FormularioParaAutorizacaoCadastroNotebookRede.pdf" style="color:grey"> Termo.pdf</a></label></p>
+   </div>
+</div>
+</div>   
+
+ <div class="form-group" style="margin:0px 0px 0px 0px;"> 			
+    	{{ form_widget (edit_form_user.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+	    		{{form_end(edit_form_user)}}  
+          <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                     
+                    <div class="modal fade" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                               
+                              </div>
+                              <div class="modal-body">
+                                <div class="alert alert-danger" role="alert">
+                                    <span style="font-size: 18px; font-weight: bold;">Deseja realmente deletar este item?</span> Caso sim clique em ok, caso contrario clique em canselar....</div>
+                                </p>
+                              </div>
+                              <div class="modal-footer">
+                              <table>
+                              <tr align="center">
+                               <td> <button type="button" class="btn btn-default btn-lg"     data-dismiss="modal">Cancelar</button>
+                               </td>
+                                <td style="padding-left: 10px;"><a class="btn btn-danger btn-lg" href="{{ path('solicitaExclusao',{ 'mac' : entity.mac})}}">Ok</a> </td>
+                              </tr>
+                              </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+           </div>
+                     
+               
+    		</div>
+    		  </div>
+     </div>
+    		
+
+     	
+      
+      </div>
+
+  
+   
+
+  <!--</div>-->
+
+{% endblock %}
+
+{% block scriptsextra %}
+
+ <script type="text/javascript">
+     $('#exampleModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          var recipient = button.data('whatever') 
+          var modal = $(this)
+          modal.find('.modal­title').text('Excluir item!!!'+recipient)
+          //modal.find('.modal­body input').val(recipient)
+      })
+    </script>
+  <script type="text/javascript">
+  $(function () {
+    $("input#usuario1").blur(function(){ 
+               //if (event.keyCode == 13 || event.whitch == 13 ) {
+
+                    $("#itenscpf").html("<img src='{{ asset('bundles/sytemsg/loading/loading1.gif') }}'/>");
+                      
+                        var id= $('#usuario1').attr('rel');
+                        //var url = Routing.generate('SytemSGBundle_Solicitacoes_searchCpfuser');
+                        //Pega o valor do usuario atual...
+                        var itens = $('#usuario1').val();
+                        var DATA ='usuario='+itens+'&id='+id;
+                        
+                        //Função ajax
+                        $.ajax({
+                          //Tipo de envio POST ou GET...
+                          type: "POST",
+                          //Caminho do arquivo PHP...
+                          url: "{{ path('searchCpfuser') }}",
+                          //Arquvios passados via POST neste caso, segue o mesmo modelo para GET...
+                          data: DATA,//{ 'usuario':itens,'id':id },
+                          //Se der tudo ok no envio...
+                          
+                          success: function(resposta){
+                            //Colocar a resposta do aqruivo na div....
+                            $("#itenscpf").html(resposta);
+                            //$("#x1").remove();
+                          },
+                          error: function (XMLHttpRequest, textStatus, errorThrown) {             
+                            $("#itenscpf").html("error :"+XMLHttpRequest.responseText);
+                                  
+                          },
+                          complete: function(data){
+                            console.log(data);
+                            
+                           
+                          },
+                          
+                        })
+                       event.preventDefault();
+                       //alert(itens);
+                  //}   
+           });
+  });
+            
+</script>
+ {% endblock %}

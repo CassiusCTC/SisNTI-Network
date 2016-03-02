@@ -1,0 +1,208 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>  
+    </ul>
+          
+        
+</div>
+{% endblock col #}
+
+
+{% block body -%}
+<ol class="breadcrumb">
+                                    <li>
+                                     <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                        
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Arquivos Remotos
+                                    </li>
+                     </ol>
+                        
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+          <h1 class="panel-title" style="text-align:center; font-size:25px;"><strong>Path Arquivos</strong></h1>
+  </div>
+  <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:18px;"><strong>Aqui Nesta Página é permitido editar as configurações de arquivos arp_icea, icea, dhcp, dhcplog: </strong></p><p style="text-align:justify; font-size:16px;"><strong></br> Se definir o ip como vazio o sistema ira admitir que o mesmo arquivo é local, caso contrario se definir um ip o mesmo admitirá que o arquivo tem acesso remoto.<br></br> <span style="color:red;">(No caminho do arquivo coloque a path sempre finalizando com uma barra '/', sem o nome do arquivo.<br> Ex: /var/www/ )</span>.</strong> </p>
+    </div>
+  </div>
+
+  <field>
+   <div class="table-responsive">
+   <div  class="col-xs-10" style="margin:0px 0px 0px 80px;">
+    <table class="table">
+        <thead>
+           <tr> <td colspan="6"><center><h3><strong style=""> Configuração Arp_icea:</strong></h3></center></td></tr>
+            <tr class="info">
+                 
+                <th>Ip servidor</th>                 
+                  <th>Username</th>                  
+                  <th>Nome do Arquivo</th>                  
+                  <th>Caminho Destino</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+               
+                <td>{{ entities[2].serverip }}</td>                 
+                  <td>{{ entities[2].username }}</td>                   
+                   <td>{{ entities[2].nomeArquivo }}</td>
+                     <td>{{ entities[2].caminhoDestino }}</td>
+                <td>
+                <ul>
+                    
+                   
+                        <a class="btn btn-success" href="{{ path('arquivosremotos_edit', { 'id': entities[2].id }) }}">Editar</a>
+                    
+                </ul>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+           <tr> <td colspan="6"><center><h3><strong style=""> Configuração Icea.h:</strong></h3></center></td></tr>
+            <tr class="info">
+                 
+                <th>Ip servidor</th>                 
+                  <th>Username</th>
+                  <th>Nome do Arquivo</th>                   
+                  <th>Caminho Destino</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+               
+                <td>{{ entities[3].serverip }}</td>                 
+                <td>{{ entities[3].username }}</td>                   
+                <td>{{ entities[3].nomeArquivo }}</td>                    
+                <td>{{ entities[3].caminhoDestino }}</td>
+                <td>
+                <ul>
+                    
+                   
+                        <a class="btn btn-success" href="{{ path('arquivosremotos_edit', { 'id': entities[3].id }) }}">Editar</a>
+                    
+                </ul>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+           <tr> <td colspan="6"><center><h3><strong> Configuração dhcp:</strong></h3></center></td></tr>
+            <tr class="info">
+                 
+                <th>Ip servidor</th>                 
+                  <th>Username</th>
+                    <th>Nome do Arquivo</th>
+                    <th>Caminho Destino</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>{{ entities[0].serverip }}</td>                 
+                  <td>{{ entities[0].username }}</td>                  
+                   <td>{{ entities[0].nomeArquivo }}</td>
+                    <td>{{ entities[0].caminhoDestino }}</td>
+                <td>
+                <ul>
+                    
+                   
+                        <a class="btn btn-success" href="{{ path('arquivosremotos_edit', { 'id': entities[0].id }) }}">Editar</a>
+                    
+                </ul>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+           <tr> <td colspan="6"><center><h3><strong> Configuração exec dhcp:</strong></h3></center></td></tr>
+            <tr class="info">
+                 
+                <th>Ip servidor</th>                 
+                  <th>Username</th>
+                   
+                    <th>Nome do Arquivo</th>
+                    
+                    <th>Caminho Destino</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>{{ entities[4].serverip }}</td>                 
+                <td>{{ entities[4].username }}</td>                  
+                <td>{{ entities[4].nomeArquivo }}</td>
+                <td>{{ entities[4].caminhoDestino }}</td>
+                <td>
+                <ul>
+                    
+                   
+                        <a class="btn btn-success" href="{{ path('arquivosremotos_edit', { 'id': entities[4].id }) }}">Editar</a>
+                    
+                </ul>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+
+     <table class="table">
+        <thead>
+           <tr> <td colspan="6"><center><h3><strong style=""> Configuração dhcplog:</strong></h3></center></td></tr>
+            <tr class="info" >
+                 
+                <th>Ip servidor</th>                 
+                  <th>Username</th>
+                    <th>Nome do Arquivo</th>
+                    <th>Caminho Origem</th>
+                   
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+               
+                <td>{{ entities[1].serverip }}</td>                 
+                  <td>{{ entities[1].username }}</td>
+                  <td>{{ entities[1].nomeArquivo }}</td>
+                  <td>{{ entities[1].caminhoDestino }}</td>
+                <td>
+                <ul>
+                    
+                   
+                        <a class="btn btn-success" href="{{ path('arquivosremotos_edit', { 'id': entities[1].id }) }}">Editar</a>
+                    
+                </ul>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+
+   
+</div>
+ 
+
+ </div> </div> </div>
+    {% endblock %}

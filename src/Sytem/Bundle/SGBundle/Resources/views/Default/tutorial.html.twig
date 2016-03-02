@@ -1,0 +1,139 @@
+{% extends 'SytemSGBundle:Default:baseSolicitacoes.html.twig' %}
+{% block title %}SysNTI - NetManager Tutorial
+
+{% endblock %}
+ {# block col %}
+    {#<div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav side-nav">
+
+            <li><a href="{{ path('useradmin') }}"><strong> Home </strong></a></li>   
+            <li> <a href="{{ path('search_user') }}" style="font-weight:bold;"> Gerenciar Mac usuário</a> </li>
+            <li> <a href="{{ path('search_usernovanotificacao') }}" style="font-weight:bold;"> Solicitações em Andamento</a> </li>
+            <li> <a href="{{ path('tutorial') }}" style="font-weight:bold;"> Tutorial</a> </li>            
+     </ul>
+
+  </div>#}
+           
+      
+ {# endblock col #} 
+
+        {% block imagem %}
+
+        
+
+        {% endblock imagem %}
+
+{% block body %}
+<br>
+<ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">Home</a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        Tutorial
+                                    </li>
+   </ol>
+    
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+     <div class="col-xs-12"> 
+        <h1 style="text-align: center; color: greey"><b>Tutorial de uso do sistema</b></h1>
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Sistema iceasgr: <span class="text-muted">O que podemos fazer nele?</span></h2>
+          
+          <p class="lead" style="text-align: justify">O sistema permitirá a nível de usuario comum a solicitação de Mac´s e também gerenciar os mesmos na rede da ufop. Estas ações só seram permitidas ao usuário responsável (no caso professores e setor administrativo, podendo ser abertas exceções de acesso mediante solicitação ao setor da Nti Icea.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{{ asset('bundles/sytemsg/tutorial/login.png') }}">
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+          <h2 class="featurette-heading">Primeiro acesso <span class="text-muted">Pagina inicial..</span></h2>
+          <p class="lead">Ao fazer o login o sistema redirecioná o usuário para página inicial onde esta disponivel o menu principal. Neste menu contem basicamente três funcionalidades as mesmas são:<br><br>
+          <b>Solicitar Mac:</b> este link disponibilisa o acesso ao formulário de solicitalção de mac.<br><br>
+          <b>Gerenciar Mac:</b> este link disponibilisa o acesso a lista de macs que são gerenciados pelo usuário.<br><br>
+          <b>Solicitações em andamento:</b> este link disponibilisa o acesso a lista de solicitações, para que o usuário tenha disponivel as novas solicitações efetuadas.
+
+          </p>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{{ asset('bundles/sytemsg/tutorial/home.png') }}">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Solicitar Mac <span class="text-muted">passos:</span></h2>
+          <p class="lead" ><br>
+            
+             <h4 style="text-align:justify;" > <li><b>Passo 1:</b> Click no link <kbd>Solicitar Mac</kbd></li></h4><br>
+             <h4 class="featurette-heading"><b>Formulário de solicitação:</b></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 2:</b> Ao acessar o formulário informe o cpf no campo <b style="color:greey">Usuário com permissão de uso</b> e aperte a tecla  <kbd>Enter</kbd> para verificar se o usuário existe na minha ufop.<br><br> <div class="alert alert-info" style="text-align:justify;"><b>Obs:</b> Caso sejam vários usuarios que utilizam o mac favor informar <kbd>10000000001</kbd> como cpf e o sistema ira entender como Usuario comum não é necessario vericar, caso ideal para laboratórios</div></li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 3:</b> Upload do termo de compromisso, click em <kbd>Selicionar arquivo</kbd> caso o usuario não tenha anexado em algum momento o termo. Caso não tenha o documento em seu computador pode fazer o download do mesmo atraves do link <kbd>Termo.pdf</kbd>. <br><br> <div class="alert alert-info" style="text-align:justify;"><b>Obs:</b> Se o usuário for <kbd>10000000001</kbd>, ou o mesmo já tenha feito o upload do termo não será necessário anexar o mesmo.</div></li></h4><br>
+             <h4 style="text-align:justify;"> <li><b>Passo 4:</b> Informe o MAC adress do dispositivo que deseja solicitar.</li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 5:</b> Informe a descrição do equipamento <kbd>Ex: Notebook Acer, Core i5, Memória 4G e 500G de RAM.</kbd></li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 6:</b> Informe o laboratório que o mesmo faz parte, caso não pertença a algum laboratório informe a opção <kbd>Dispositivos externos</kbd>.</li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 7:</b> Informe o tipo do dispositivo.</kbd>.</li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 8:</b> Informe a justificativa  o porque esta fazendo a solicitação.</li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 9:</b> Click em <kbd>Enviar</kbd> caso tenha certesa dos dados referentes ao cadastro do Mac. Caso contrario click em <kbd>Cancelar</kbd> para que a ação seja abortada.</li></h4>
+          </p>
+                      
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive center-block"  data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{{ asset('bundles/sytemsg/tutorial/solicitar.png') }}">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+      <div class="row featurette">
+        <div class="col-md-7 col-md-push-5" >
+          <h2 class="featurette-heading">Gerenciar Mac <span class="text-muted">passos:</span></h2><br>
+         <h4 style="text-align:justify;" > <li><b>Passo 1:</b> Click no link <kbd>Gerenciar Mac</kbd></li></h4><br>
+             <h4 class="featurette-heading"><b>Lista de Macs gerenciados:</b></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 2:</b> Acesse o link <kbd>Detalhes</kbd></li></h4>
+             <div class="alert alert-info" style="text-align:justify;"><h4 style="text-align:justify;"><b>Obs:</b> esta opção lhe dá direito a duas ações atualizar os dados, e remover o mac. Em ambos os casos a atualização é parcial pois é necessário aguardar que a NTI defira as ações.</h4></div>
+             <h4 style="text-align:justify;"> <li><b>Passo 3:</b> Atualize as infoemações que foerem necessárias.</li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 4:</b> Click em <kbd>Atualizar</kbd> caso tenha certesa dos dados referentes ao cadastro do Mac.</li></h4>
+             <h4 style="text-align:justify;"> <li><b>Passo 4.1:</b> Click em <kbd>Deletar</kbd> Caso a opção seja remover o MAC das sua responsabilidade.<li></h4>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+         <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{{ asset('bundles/sytemsg/tutorial/gerenciar.png') }}">
+        </div>
+      </div>
+      <hr class="featurette-divider">
+      <div class="row featurette">
+        <div class="col-md-7" >
+          <h2 class="featurette-heading">Verificar Solicitações em andamento <span class="text-muted">passos:</span></h2><br>
+         <h4 style="text-align:justify;" > <li><b>Passo 1:</b> Click no link <kbd>Solicitações em andamento</kbd></li></h4><br>
+             <h4 class="featurette-heading"><b>Lista de solicitações em andamento:</b></h4>
+             
+             <div class="alert alert-info" style="text-align:justify;"><h4 style="text-align:justify;"><b>Obs:</b> esta opção lhe dá direito a vizualizar as solicitações que foram enviadas pelo usuario responsavel.</h4></div>
+             
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{{ asset('bundles/sytemsg/tutorial/andamento.png') }}">
+        </div>
+      </div>
+     </div>
+     
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      
+       
+
+    {% endblock %}

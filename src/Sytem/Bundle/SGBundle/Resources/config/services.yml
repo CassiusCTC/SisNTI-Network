@@ -1,0 +1,23 @@
+parameters:
+
+    user_root_provider.class: Sytem\Bundle\SGBundle\Services\UserROOTProvider
+    user_ldap_provider.class: Sytem\Bundle\SGBundle\Services\UserLDAPProvider
+    custom_md5_encoder.class: Sytem\Bundle\SGBundle\Services\CustomMD5PasswordEncoder
+
+services:
+
+    sytem_sg.path_class:
+          class :  Sytem\Bundle\SGBundle\PathClass
+          arguments: [ @file_locator ]
+    user_root_provider:
+          class :  "%user_root_provider.class%"
+
+    user_ldap_provider:
+          class :  "%user_ldap_provider.class%"
+          arguments: [ @doctrine.orm.entity_manager ]
+
+    custom_md5_encoder:
+          class :  "%custom_md5_encoder.class%"
+          #arguments: [ @service_container ]
+
+

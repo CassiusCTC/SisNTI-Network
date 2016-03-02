@@ -1,0 +1,135 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{#block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+           
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+       
+            <li><a href="{{ path('arquivosremotos') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Arquivos Remotos</strong></a></li>
+               
+    </ul>
+         
+          
+          
+</div>
+{% endblock col #}
+
+{% block body -%}
+    <div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Editar configuração do Arquivo remoto</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.</strong> </p></div>
+ 
+  
+  
+
+   
+    {{form_start(edit_form, {'attr': {'class':'form-horizontal'}}) }}
+    <div class="table-responsive" > 
+    <div class="row" >  
+    <div  class="col-sm-12" >  
+
+      {% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+          <button type="button" class="close" data-dismiss="alert">x</button>  
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+      {% endfor %} 
+  
+<div class="form-group">
+     <div class="col-sm-6">
+       <span style="color:red;">{{ form_errors(edit_form.serverip) }} </span>
+      <div class="input-group">
+        <span class="input-group-addon"><b>IP servidor*</b></span>
+          {{ form_widget (edit_form.serverip, {'attr': {'class':'form-control','data-mask':'099.099.099.099','placeholder':'099.099.099.099'}} )}}
+      </div>
+    </div>
+    <div class="col-sm-6">
+       <span style="color:red;">{{ form_errors(edit_form.username) }}</span>
+      <div class="input-group">       
+        <span class="input-group-addon"><b>Username *</b></span>
+              {{ form_widget (edit_form.username, {'attr': {'class':'form-control'}})}}
+      </div>
+    </div>
+  </div>
+
+<div class="form-group">
+     <div class="col-sm-12">
+       <span style="color:red;">{{ form_errors(edit_form.nomeArquivo) }}</span>
+      <div class="input-group">       
+        <span class="input-group-addon"><b>Nome do Arquivo *</b></span>
+            
+          {{ form_widget (edit_form.nomeArquivo, {'attr': {'class':'form-control'}})}}
+      </div>
+    </div>
+</div>
+<div class="form-group">
+     <div class="col-sm-12">
+       <span style="color:red;">{{ form_errors(edit_form.caminhoDestino) }}</span>
+      <div class="input-group">  
+          {% if entity.id == 2 %}
+            <span class="input-group-addon"><b>Caminho Origem *</b></span>   
+            
+          {% elseif entity.id != 2 %}
+             <span class="input-group-addon"><b>Caminho Destino*</b></span>   
+           
+          {% endif %}
+              {{ form_widget (edit_form.caminhoDestino , {'attr': {'class':'form-control'}})}}
+       </div>
+    </div>
+</div>               
+{{ form_widget (edit_form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+                  {{form_end(edit_form)}}
+               
+</div> 
+</div>
+</div>
+</div>
+ </div>
+  </div>
+  
+   
+    
+    
+  <!--</div>-->
+    
+
+{% block javascript %}
+ {{ parent()}}
+   <script type="text/javascript">
+     $('#exampleModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          var recipient = button.data('whatever') 
+          var modal = $(this)
+          modal.find('.modal­title').text('Excluir item!!!'+recipient)
+          //modal.find('.modal­body input').val(recipient)
+      })
+    </script>
+    <script type="text/javascript">
+        
+
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            $('.date').mask('AA:AA:AA:AA:AA:AA', {
+                    onKeyPress: function(str, e, obj){ 
+                        $(obj).val(str.toLowerCase());
+                    }
+               }
+            );
+            $('.phone_with_ddd').mask('(00) 0000-0000');
+        );
+  
+    </script>
+    
+
+
+ {% endblock javascript %}
+ 
+    
+
+
+
+{% endblock %}

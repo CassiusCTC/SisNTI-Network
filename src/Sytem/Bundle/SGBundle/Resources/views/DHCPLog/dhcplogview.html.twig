@@ -1,0 +1,172 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+
+
+{# block col %}
+
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav"> 
+            
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>
+            
+            <li><a href="{{ path('connected') }}"><strong>Status usuário</strong> </a></li>  
+            
+      </ul>
+        
+</div>
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">SysNTI - NetManager Administrador</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i>Dados Rede Dhcplog Ufop
+                                    </li>
+   </ol>
+<ul class="nav nav-pills nav-justified">
+  <li role="presentation" class="menu"><a href="{{ path('dhcplogview') }}"><strong style="font-size:18px;">Ultimos Acessos</strong></a></li>
+  <li role="presentation"  class="menu"><a href="{{ path('connected') }}"><strong style="font-size:18px;">Usuários Conectados</strong></a></li>
+  <li role="presentation"  class="menu"><a href="{{ path('poucoconnected') }}"><strong style="font-size:18px;">Usuários poucos frequentes</strong></a></li>
+  <li role="presentation"  class="menu"><a href="{{ path('noconnected') }}"><strong style="font-size:18px;">Usuários não Conectados</strong></a></li>
+</ul>
+<br>
+   <div class="form-group">
+      <div class="alert alert-info" style="text-align: lefth; font-size: 15px;"> 
+      
+         {% for flashMenssage in app.session.flashbag.get('message') %}
+         
+               
+                <strong>{{ flashMenssage }}</strong><br>
+         
+         {% endfor %} 
+       </div>
+  </div> 
+
+    
+      
+<!--<div class="box-content" style="overflow:auto; height:500px">
+    <table class="records_list">
+    <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">-->
+
+    <br>
+
+     <h2 class="sub-header">Tabela de dados da rede Ultimos acessos</h2><br>
+  <div class="table-responsive">
+  <div class="col-xs-12"> 
+      {# total items count #}
+    <div class="count">
+    <a href="{{ path('resultupdateview') }}" class="btn btn-success" > <strong>Atualizar Dhcplog</strong>  <i class="glyphicon glyphicon-refresh"></i></a><br>
+        <h4><strong>Número de registros</strong> - <SPAN STYLE="color:#00008B; font-weight: bold;">{{ pagination|length }}  </SPAN>    </h4>
+        <br><br>
+
+    </div>
+    <table id="listar" class="table">
+        <thead>
+            <tr class="info">
+                <!--<th><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>-->
+                 <th >Status DHCP</th>
+                <th> Ip </th> 
+                 <th> Mac</th> 
+                
+                <th >Data dhcplog</th>
+                 <th> Data cadastro</th>
+
+                <th > Ações</th>
+            </tr>
+        </thead>
+        <tbody >
+       
+                {% for entity in pagination %}
+                    <tr class="odd gradeX">     
+                      {# <td><a href="{{ path('dadosarquivos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+                       {% if entity.statusdhcp == 'connected' %}
+                         {# <td class="center" style="color: green; font-weight:bold; background-color:#98FB98;">  <span class="glyphicon glyphicon­-star" aria­hidden="true"></span>{{ entity.status}}</td> #}
+                         <td class="odd gradeX" > <h4><span class="label label-success">conectado</span></h4></td>
+                      {% elseif entity.statusdhcp == 'small_connected'%}
+                         {#<td class="center" style="color: #8B0000;font-weight:bold; background-color:#EE6A50;">{{ entity.status}}</td>#}
+                        <td class="odd gradeX" > <h4><span class="label label" style='color:yellow;'>conectado</span></h4></td>
+                       {% elseif entity.statusdhcp == 'no_connected'%}
+                         {#<td class="center" style="color: #8B0000;font-weight:bold; background-color:#EE6A50;">{{ entity.status}}</td>#}
+                        <td class="odd gradeX" > <h4><span class="label label-danger">não conectado</span></h4></td>
+                        {% else %}
+                         {#<td class="center" style="color: #8B0000;font-weight:bold; background-color:#EE6A50;">{{ entity.status}}</td>#}
+                        <td class="odd gradeX" > <h4><span class="label label" style="background-color:yellow; color:red"> conexão não foi iniciada</span></h4></td>
+                      {% endif %}
+                       
+
+                      
+                        <td class="center">{{ entity.ip }}</td>                            
+                        <td class="center">{{ entity.mac }}</td>
+                       
+                      
+                         
+                        <td class="center" >
+                          {% if entity.dataDhcplog %}
+                          {{ entity.dataDhcplog|date('d-m-y') }}
+                          {% endif %}
+                        </td>
+                         <td class="center" >
+                          {% if entity.dataCadastro %}
+                          {{ entity.dataCadastro|date('d-m-y') }}
+                          {% endif %}
+                        </td>
+                        
+                        
+                        <td><a class="btn btn-default" href="{{ path('dadosarquivos_show', { 'id': entity.id }) }}">Detalhes <i class="glyphicon glyphicon-zoom-in icon-white"></i></a></td>                 
+                       {# <td><a class="btn btn-info" href="{{ path('dadosarquivos_edit', { 'id': entity.id }) }}"><i class="glyphicon glyphicon-edit icon-white"></i>Edit</a></td>#}
+                            
+                        
+                    </tr>
+                {% endfor %}
+
+        </tbody>
+    </table>
+    
+   </div>
+   </div>
+
+ </div>
+    
+    
+
+
+       
+    {% endblock %}
+   {% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+
+    <script>
+      $(document).ready(function(){
+
+          $(".menu").click(function(){
+              $(this).addClass("active");
+
+        });
+
+      });
+
+      </script>
+
+
+{% endblock %}

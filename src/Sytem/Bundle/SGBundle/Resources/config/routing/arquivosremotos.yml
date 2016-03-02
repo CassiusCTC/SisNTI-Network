@@ -1,0 +1,31 @@
+arquivosremotos:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:ArquivosRemotos:index" }
+
+#classificacao_show:
+   # path:     /{id}/show
+    #defaults: { _controller: "SytemSGBundle:Classificacao:show" }
+
+#arquivosremotos_new:
+    #path:     /new
+    #defaults: { _controller: "SytemSGBundle:ArquivosRemotos:new" }
+
+#arquivosremotos_create:
+    #path:     /create
+    #defaults: { _controller: "SytemSGBundle:ArquivosRemotos:create" }
+    #requirements: { _method: post }
+
+arquivosremotos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:ArquivosRemotos:edit" }
+
+arquivosremotos_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:ArquivosRemotos:update" }
+    requirements: { _method: post|put }
+
+#classificacao_delete:
+    #path:     /{id}/delete
+    #defaults: { _controller: "SytemSGBundle:Classificacao:delete" }
+    #requirements: { _method: post|delete }
+

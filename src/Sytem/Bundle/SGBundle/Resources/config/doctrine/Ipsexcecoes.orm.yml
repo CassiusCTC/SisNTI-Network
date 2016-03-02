@@ -1,0 +1,24 @@
+Sytem\Bundle\SGBundle\Entity\Ipsexcecoes:
+    type: entity
+    table: ipsexcecoes
+    uniqueConstraints:
+        ipexcecao:
+            columns:
+                - ipexcecao
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ipexcecao:
+            type: string
+            nullable: false
+            length: 15
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }

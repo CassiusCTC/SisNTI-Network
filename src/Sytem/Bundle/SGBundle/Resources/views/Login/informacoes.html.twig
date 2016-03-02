@@ -1,0 +1,56 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{% block title %}Informações
+
+{% endblock %}
+ {% block col %}
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+           <li><a href="{{ path('login') }}"><i class="glyphicon glyphicon-chevron-left"></i>  <strong>Login</strong></a></li>
+    </ul>   
+ </div> 
+ {% endblock col %} 
+
+        {% block imagem %}
+
+        {% endblock imagem %}
+
+{% block body %}
+<ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="{{ path('login') }}">Login</a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        Informações
+                                    </li>
+   </ol>
+    
+<br>
+<br><br>
+    <div class="col-lg-12">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 alert well">
+           <h1> <font color="#B40404"><p class="panel-title"><b>Sistema Gerenciamento de Dispositivo da Rede.</b></p></font></h1>
+            <div class="panel-body">
+                <p>
+                    <b>Objetivo:</b> Atender as demenadas de serviço do NTI, quanto a solicitações de dispositivos.<br/>
+                </p>
+                <p>
+                    <b>Usuários:</b> Os usuários do sistema são providos da MinhaUfop, ou seja, quem for acessar o sistema deve utilizar o mesmo usuário e senha que utiliza
+                    no sistema da MinhaUfop, sendo o CPF como login e a senha cadastrada.<br/>
+                </p>
+                <p style="text-align:justify">
+                    <b>Como funciona:</b> Basta acessar o sistema e assim o usuário terá acesso a interface que irá disponibilizar um formulário para solicitação de MAC
+                    ao NTI, também será disponibilizado interfaces para acompanhamento das Solicitações de Mac feitas pelo usuario, contando com detalhes de quem é o responsável pelo
+                   dispositivo, qual a previsão de atendimento, entre outras informações.<br/>
+                </p>
+                <p>
+                    <b>Desenvolvedor:</b> Cassius Tales Cordeiro, aluno de Sistema de Informação da UFOP, campus de João Monlevade.<br/>
+                </p>
+                <p>
+                    <b>Orientador:</b> Theo Lins.            
+                </p>
+            </div>
+        
+    </div></div></div>
+    {% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+           
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+        
+            <li><a href="{{ path('laboratorios') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Laboratorios</strong></a></li>
+               
+          </ul>
+         
+          
+         
+        </div>
+{% endblock col #}
+
+{% block body -%}
+
+<ol class="breadcrumb">
+                                    <li>
+                                        <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                       
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('laboratorios') }}">Laboratorios -  Ufop</a>
+                                    </li>
+                                    <li class="active">
+                                         Cadastrar Laboratorio Ufop
+                                    </li>
+</ol>
+<br>
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Novo Laboratorio</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio. </strong> </p></div>
+  <div class="table-responsive">
+  <div class="row">
+    <div  class="col-sm-8" style="margin:0px 50px 20px 150px;">
+       {{form_start(form, {'attr': {'class':'form-horizontal'}}) }}
+      <div class="form-group">
+        <div  class="col-sm-12">
+         {{ form_errors(form.nomeLaboratorio) }}
+        <div class="input-group">
+        <span class="input-group-addon"><b>Nome do laboratorio *</b></span>
+           
+          {{ form_widget(form.nomeLaboratorio, {'attr': {'class':'form-control'}}) }}  
+      </div></div></div>  
+      <div class="form-group">
+        <div  class="col-sm-12">
+        {{ form_errors(form.bloco) }}
+        <div class="input-group">
+        <span class="input-group-addon"><b>Informe o bloco do Laboratório *</b></span> 
+          {{ form_widget(form.bloco, {'attr': {'class':'form-control'}}) }}
+        </div></div></div>
+      <div class="form-group">
+        <div  class="col-sm-12">
+         {{ form_errors(form.sala) }}
+        <div class="input-group">
+        <span class="input-group-addon"><b>Informe a sala do laboratorio *</b></span>
+          {{ form_widget(form.sala, {'attr': {'class':'form-control'}}) }}
+        </div></div></div>
+        
+          <div class="form-group" style="margin:0px 0px 0px 5px;">
+        
+           {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+
+         <button class="btn btn-default btn-lg" type="reset">Cancelar</button>
+              {{form_end(form)}}
+   </div>
+
+  
+</div>
+</div>
+ </div></div></div>
+</div>
+	    
+  {#<a class="btn btn-default btn-lg " href="{{ path('laboratorios') }}">
+          	 <i class="glyphicon glyphicon-chevron-left"><strong>Voutar</strong></i> </a>#}
+	    
+   
+
+
+{% endblock %}

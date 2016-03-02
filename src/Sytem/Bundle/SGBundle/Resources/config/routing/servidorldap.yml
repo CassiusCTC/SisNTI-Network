@@ -1,0 +1,31 @@
+servidorldap:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:ServidorLdap:index" }
+
+#classificacao_show:
+   # path:     /{id}/show
+    #defaults: { _controller: "SytemSGBundle:Classificacao:show" }
+
+#servidores_new:
+    #path:     /new
+    #defaults: { _controller: "SytemSGBundle:Servidores:new" }
+
+servidorldap_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:ServidorLdap:create" }
+    requirements: { _method: post }
+
+servidorldap_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:ServidorLdap:edit" }
+
+servidorldap_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:ServidorLdap:update" }
+    requirements: { _method: post|put }
+
+#classificacao_delete:
+    #path:     /{id}/delete
+    #defaults: { _controller: "SytemSGBundle:Classificacao:delete" }
+    #requirements: { _method: post|delete }
+

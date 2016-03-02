@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dolicitacoes</title>
+    {% block css %}
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('bundles/sytemsg/ProjetoAdmin/css2/bootstrap.min.css') }}" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href=" {{ asset('bundles/sytemsg/ProjetoAdmin/css2/dashboard.css') }}" rel="stylesheet">
+    <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/font-awesome-4.1.0/css/font-awesome.min.css') }}" rel="stylesheet">
+
+    {% endblock css %}
+    {% block  javascripts %}
+    <script  type="text/javascript"   src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/jquery-1.11.1.min.js') }}"></script>
+   
+    <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js2/dataTables.bootstrap.js') }}"></script>
+     
+
+    {% endblock  javascripts %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Nti - System </a>
+          <ul class="nav navbar-nav navbar-rigth"><li><a href="#"> Data: {{ "now"|date("d/m/Y") }}
+          </a></li></ul>
+         
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          
+          <ul class="nav navbar-nav navbar-right">           
+            <li><a href="{{ path('sair') }}"><i class="fa fa-fw fa-power-off"></i> Sair</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">           
+            <li><a href="#"><i class="glyphicon glyphicon-home"></i> Home </a></li>
+          </ul>
+            
+        </div>
+      </div>
+    </nav>
+
+          
+        {% block col %}
+
+        {% endblock col %}
+        {% block imagem %}
+
+        {% endblock imagem %}
+          
+       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          
+          
+
+        {% block body %}
+
+        {% endblock body %}
+          
+    </div>
+  </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  
+    {% block  javascript %}
+        <script  type="text/javascript"  src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/jquery-1.11.0.js') }}"></script>
+        
+         <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js2/jquery.min.js') }}"></script>
+         <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js2/bootstrap.min.js') }}"></script>
+         <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js2/docs.min.js') }}"></script>
+         <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js2/ie10-viewport-bug-workaround.js') }}"></script>
+         <script src="{{ asset('bundles/sytemsg/ProjetoHome/js/bootstrap-modal.js') }}"></script>
+          <script src="{{ asset('bundles/sytemsg/jquery/jquery.mask.min.js ') }}"></script>
+           <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js2/jquery.dataTables.min.js') }}"></script>
+          <script src="{{ asset('bundles/sytemsg/ProjetoHome/js/Chart.min.js') }}"></script>
+        <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js2/ie-emulation-modes-warning.js') }}"></script>
+         <script src="{{ asset('bundles/sytemsg/ProjetoHome/js/demo.js') }}"></script>  
+        
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    
+    {% endblock  javascript %}
+   
+  </body>
+</html>
+

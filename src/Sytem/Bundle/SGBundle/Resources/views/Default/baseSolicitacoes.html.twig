@@ -1,0 +1,180 @@
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>{% block title %}SysNTI - NetManager Solicitações de MAC{% endblock %}</title>
+        {% block css %}
+         <!--Bootstrap-->
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/bootstrap.css') }}" rel="stylesheet">
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/bootstrap.min.css') }}" rel="stylesheet">
+              
+
+         <!--estrutura-->
+           <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/sb-admin.css') }}" rel="stylesheet">
+            
+
+           <!-- <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/vermelho-theme.css') }}" rel="stylesheet">-->
+            <!--  <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/style.css') }}" rel="stylesheet">-->
+
+
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/jquery.fancybox.css') }}" rel="stylesheet"> 
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/uniform.default.css') }}" rel="stylesheet"> 
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/chosen.css') }}" rel="stylesheet">     
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/DT_bootstrap.css') }}" rel="stylesheet"> 
+
+            <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/font-awesome-4.1.0/css/font-awesome.min.css') }}" rel="stylesheet">
+              <link  href="{{ asset('bundles/sytemsg/ProjetoAdmin/css/uniform.default.css') }}" rel="stylesheet"> 
+               <link href=" {{ asset('bundles/sytemsg/datatable/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+
+
+
+        {% endblock %}
+
+        
+
+          <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+             {% block javascripts1%}
+                <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/html5shiv.js') }}"></script>
+                <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/respond.min.js') }}"></script>
+            {% endblock %}
+          <![endif]-->
+
+    </head>
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+             <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN')  %}
+                    <a class="navbar-brand" href="{{ path('homeadmin') }}">SysNTI - NetManager</a>
+                    <a class="navbar-brand" href="#">Web Master - Data: {{ "now"|date("d/m/Y") }}
+                    </a>          
+                  
+
+                  {% elseif is_granted('ROLE_USER') %}
+                    <a class="navbar-brand" href="{{ path('useradmin') }}">SysNTI - NetManager</a>
+
+                  {% else %}
+                    <a class="navbar-brand" href="{{ path('login') }}">SisNTI - Network </a>
+                    <a class="nav navbar-brand navbar-right" href="#"> Data: {{ "now"|date("d/m/Y") }}
+                    </a>
+                  {% endif %}
+
+
+                </div>
+               
+
+               {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %} 
+               <ul class="nav navbar-nav navbar-right">  
+                 <li><a href="{{ path('sair') }}"><i class="fa fa-fw fa-power-off"></i> Sair</a></li>
+                        
+                   
+                 </ul>
+
+              {% endif  %}  
+       
+            
+                <!-- Top Menu Items -->
+               
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                  {% block col %}
+                   <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                        <ul class="nav navbar-nav side-nav">
+                            
+                                        
+                            <li><a href="{{ path('useradmin') }}"><strong> Home </strong></a></li>   
+                             <li><a href="{{ path('newsolicitacao') }}">  <strong>Solicitar  de Mac </strong></a></li> 
+                            <li> <a href="{{ path('search_user') }}" style="font-weight:bold;">Gerenciar Mac</a> </li>
+                            <li> <a href="{{ path('search_usernovanotificacao') }}" style="font-weight:bold;">Solicitações em Andamento</a> </li>
+                            <li> <a href="{{ path('tutorial') }}" style="font-weight:bold;"> Tutorial</a> </li>                        
+                        </ul>
+
+                  </div>
+         
+                  {% endblock col %} 
+         
+                <!-- /.navbar-collapse -->
+            </nav>
+
+
+        <!--Twig vai carregar os templates dentro da div -->
+            <div id="page-wrapper">
+            <div class="container-fluid">
+                  
+                        <!-- Page Heading -->
+                      
+                    {% block imagem %}
+
+                    {% endblock imagem %}       
+
+                    {% block body %}
+
+
+                    {% endblock body %}
+                    <br><br>    <br><br>    <br><br>
+      <!-- /END THE FEATURETTES -->
+   <hr class="featurette-divider">
+
+      <!-- FOOTER -->
+      <footer>
+       
+        <p class="pull-right"><b>ICEA</b> &copy; 2015 SysNTI - NetManager<br>Cassius Tales Cordeiro</p>
+      </footer><br><br><br><br><br>
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>  </div>
+        <!-- /#wrapper -->
+
+ 
+        {% block javascripts %}
+
+         
+            <!-- jQuery Version 1.11.0 -->
+            <script  type="text/javascript"  src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/jquery-1.11.0.js') }}"></script>
+            
+            <script  src="{{ asset('bundles/sytemsg/ProjetoHome/js/jquery.js') }}"></script>
+            
+           
+        
+        
+            
+            
+         
+            <script src="{{ asset('bundles/sytemsg/ProjetoHome/js/breakpoints.js') }}"></script>
+           
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/bootstrap.min.js') }}" ></script>
+            <script src="{{ asset('bundles/sytemsg/ProjetoAdmin/js/jquery.blockui.js') }}" ></script>
+            
+            
+            <script src="{{ asset('bundles/sytemsg/jquery/jquery.mask.min.js') }}" ></script>
+
+            <!-- Componentes -->
+
+            
+            
+            
+                  {% block scriptsextra %}
+                  {% endblock scriptsextra %}
+        {% endblock %}
+
+    </body>
+</html>

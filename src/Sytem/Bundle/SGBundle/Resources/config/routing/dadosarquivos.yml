@@ -1,0 +1,47 @@
+dadosarquivos:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:index" }
+
+dadosarquivos_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:show" }
+
+dadosarquivos_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:new" }
+
+dadosarquivos_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:create" }
+    requirements: { _method: post }
+
+dadosarquivos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:edit" }
+
+dadosarquivos_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:update" }
+    requirements: { _method: post|put }
+
+dadosarquivos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:delete" }
+    requirements: { _method: post|delete }
+
+dadosarquivos_newdeferido:
+    path:     /{id}/newdeferido
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:newdeferido" }
+
+
+dadosarquivos_create2:
+    path:     /create2
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:create2" }
+    requirements: { _method: post }
+
+
+
+
+
+
+

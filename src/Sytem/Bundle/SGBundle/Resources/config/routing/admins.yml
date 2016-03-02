@@ -1,0 +1,30 @@
+admins:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Admins:index" }
+
+admins_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Admins:show" }
+
+admins_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Admins:new" }
+
+admins_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Admins:create" }
+    requirements: { _method: post }
+
+admins_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Admins:edit" }
+
+admins_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Admins:update" }
+    requirements: { _method: post|put }
+
+admins_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Admins:delete" }
+    requirements: { _method: post|delete }

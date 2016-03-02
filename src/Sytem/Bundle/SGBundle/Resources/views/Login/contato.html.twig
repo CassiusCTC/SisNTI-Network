@@ -1,0 +1,96 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{% block title %}Contatos
+
+{% endblock %}
+ {% block col %}
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+           
+           <li><a href="{{ path('login') }}"><i class="glyphicon glyphicon-chevron-left"></i>  <strong>Login</strong></a></li>          
+    </ul>
+</div> 
+ {% endblock col %} 
+
+        {% block imagem %}
+
+         
+
+        {% endblock imagem %}
+
+{% block body %}
+<br>
+  <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="{{ path('login') }}">Login</a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        Contatos
+                                    </li>
+   </ol> <br>
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center"> <strong style="color:grey; font-size:20px"> Entre em contato - Nti</strong> </div>
+            </div>     
+       <div class="table-responsive">
+        <div class="panel-body" >
+       <div class="alert alert-info"> <p style="text-align:center; font-size:18px;"><b>A equipe do NTI irá responder através do e-mail informado.</b></p></div>
+       
+            <form role="form"  method="POST" action="{{ path('contatoRequisicao') }}" >
+            
+            
+                <br>
+                <div class="row">
+                  <div class="col-sm-7 col-md-10  col-md-offset-1 ">
+                    <div class="form-group">
+                  
+                        <div class="input-group">
+                        <span class="input-group-addon"><strong>Nome</strong></span>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome"  required autofocus/></div>
+                    </div>
+                  <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><strong>Email</strong></span>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="email@email" required/>
+                  </div>
+                    <br>
+                   <div class="form-group">
+                  
+                        <div class="input-group">
+                          <span class="input-group-addon"><strong>Assunto</strong></span>
+                          <select id="assunto" name="assunto" class="form-control" required>
+                            <option></option>
+                            <option value="Dúvidas">Dúvidas</option>
+                            <option value="Sugestões">Sugestões</option>
+                            <option value="Reclamações">Reclamações</option>
+                            <option value="Problemas">Problemas</option>
+                            <option value="Outros">Outros</option>
+                          </select> 
+                        </div>
+                    </div>
+              
+
+                   <div class="form-group">
+                  
+                        <div class="input-group">
+                        <span class="input-group-addon"><strong>Mensagem</strong></span>
+                        <textarea class="form-control" rows="10" required="required" name="mensagem" placeholder="Descreva aqui o motivo do contato, suas dúvidas, informações que deseja obter, entre outros." ></textarea>
+                    </div>
+                    <br>
+                    
+                  <div class="form-group">
+                 
+                     <button  class="btn btn-lg btn-primary " type="submit">Enviar</button>
+                     <button class="btn btn-lg btn-default " type="reset">Limpar</button>
+                     <br>
+                   </div>
+                
+            </form>
+        
+  </div></div>
+  </div>
+  </div></div></div></div><div>
+</div>
+
+    {% endblock %}

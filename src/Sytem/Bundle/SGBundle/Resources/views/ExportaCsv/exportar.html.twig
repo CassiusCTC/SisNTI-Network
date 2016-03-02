@@ -1,0 +1,100 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+{% block title %}Exporta{% endblock %}
+
+{#block col %}
+
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            <li><a href="{{ path('homeadmin') }}"><i class="glyphicon glyphicon-link"></i>  <strong>Home Adiministrador </strong></a></li>  
+           
+       
+           <li> <a href="{{ path('upload') }}" style="font-weight:bold;" >Importar</a> </li>
+          
+         
+          
+          
+          </ul>
+        </div>
+{% endblock col #}
+{% block imagem %}
+<ol class="breadcrumb">
+                                    <li>
+                                     <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                        
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Exportar
+                                    </li>
+     </ol>
+{% autoescape false %}
+    
+{% endautoescape %}
+<div class="col-sm-12 ">
+ <div class="form-group">
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+      <div class="alert alert-info" style="text-align: center; font-size: 17px;"> 
+           <button  type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+  </div>
+                  
+  <div class="panel panel-primary" style="background-color:#F2F2F2">
+  <div class="panel-heading">
+    <h3 class="panel-title">  <i class="glyphicon glyphicon-user"></i> Exportar tabelas</h3>
+  </div>
+
+  <div class="panel-body" style="ba">
+   <div class="alert alert-info" role="alert"><strong><p style="text-align:justify;font-size:16px">Para exportar tabela da base de dados é preciso selecionar a tabela a qual deseja exportar, o arquivo será exportado para a extenção CSV. Clique em Exportar para que o serviço seja executado.</p></strong></div>
+  
+   <br></br>
+   <div class="table-responsive">
+   <div class="col-sm-12" >
+      <div style="margin:0px 0px 00px 70px;">
+      <div class='form-group'>
+      <form action="{{ path('exportarcsv') }}" method="GET">
+       <div class="row">
+      
+
+       <div  class="col-sm-5">
+       <label  style="text-align:justify;font-size:17px">Selecione a tabela para exporta-la:</label><br>
+
+        <select name="table" class='form-control'>
+          <option value='Dnsips' >Dns Ips</option>
+          <option value='DadosArquivos'>Dados Arquivos</option>
+          <option value='ArquivosRemotos'>Arquivos Remotos</option>
+          <option value='Dhcpconf'>Dhcp Conf</option> 
+          <option value='ServidorLdap'>Servidor Ldap</option>   
+          <option value='Laboratorios'>Laboratorios</option>   
+          <option value='Grupos'>Grupos de Usuários</option>             
+        </select>
+
+        </div>
+        </div>
+        <br>
+        <input type="submit" value="Exportar" class='btn btn-primary btn-lg active'/>
+        </form>
+     </div>
+      </div>  
+  </div>
+  </div>
+</div>                
+</div>  </div>
+
+</div><br>
+
+ 
+{% endblock imagem %}
+
+
+{% block body %}
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+            
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+     
+            <li><a href="{{ path('intervalosips') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Faixa de Ip</strong></a></li>
+               
+          </ul>
+           
+          
+          
+        </div>
+{% endblock col #}
+
+{% block body -%}
+
+<ol class="breadcrumb">
+                                    <li>
+                                       <a href="{{ path('homeadmin') }}">SysNTI - NetManager Adminstrador</a>
+                                       
+                                    </li>
+                                    <li><a href="{{ path('intervalosips') }}">
+                                         Faixas de IPs </a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> / Cadastrar de faixa de Ip 
+                                    </li>
+</ol>
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Cadastrar Intervalo de IP:</strong></div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio!!! Informe o intervalo de ip sem os ultimos três valores (Ex:200.000.000).</strong> </p></div>
+ 
+<div class="table-responsive" > 
+  <div class="row" >  
+    <div  class="col-sm-12" > 
+    {{ form_start(form) }}
+     <div class="form-group">
+     		
+     		<div  class="col-sm-8">
+        {{ form_errors(form.intervalo) }}
+        <div class="input-group">
+        <span class="input-group-addon"><b>Informe o intervalo de Ips *</b></span>
+       
+    		 {{ form_widget (form.intervalo, {'attr': {'class':'form-control','data-mask':'099.099.099','placeholder':'099.099.099'}})}}
+      </div>
+      </div>
+      </div>
+    	     {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+
+           <button class="btn btn-default btn-lg" type="reset">Cancelar</button>
+    {{ form_end(form) }}
+   </div>
+
+  <br/>
+
+</div></div></div></div>
+</div>
+ 
+	    
+ 
+   <script type="text/javascript">
+        
+
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            
+        );
+  
+    </script>
+
+
+{% endblock %}

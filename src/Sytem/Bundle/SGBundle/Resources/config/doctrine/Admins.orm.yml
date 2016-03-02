@@ -1,0 +1,24 @@
+Sytem\Bundle\SGBundle\Entity\Admins:
+    type: entity
+    table: admins
+    uniqueConstraints:
+        cpf:
+            columns:
+                - cpf
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cpf:
+            type: string
+            nullable: false
+            length: 15
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }

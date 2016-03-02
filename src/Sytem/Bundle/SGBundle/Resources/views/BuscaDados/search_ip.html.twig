@@ -1,0 +1,189 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+
+
+{# block col %}
+
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+      <ul class="nav navbar-nav side-nav">
+            
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li> 
+            <li><a href="{{ path('search_desbloqueado') }}"><strong>Status Dispositivos da rede</strong> </a></li>                
+            <li><a href="{{ path('dadosarquivos') }}"><i class="glyphicon glyphicon-chevron-left"></i><strong>Dados da Rede Ufop</strong> </a></li>            
+       </ul>
+</div>
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">SysNTI - NetManager Administrador</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Dados Redes Ufop
+                                    </li>
+   </ol>
+    
+
+    
+        
+        
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"> Faça aqui sua Pesquisa: </h3>
+  </div>
+  <div class="panel-body">  
+    <!--<table class="records_list">-->
+  <form class="form-inline" method="POST" action="{{ path('search_ip') }}">
+       
+       
+          <div class="form-group"-->
+                       <label class="control-label" >Busca:</label>  
+             <!--div class="col-xs-6 col-sm-3"-->
+                  <select class="form-control" style="width:200px;margin-right: 10px;" name="opcao">               
+                        <option value="2" selected="true">IP</option>    
+                        <option value="1">Mac</option>
+                        <option value="3">Data</option>
+                        <option value="6">Laboratorio</option>
+                    </select>
+                    
+           </div>
+              
+
+          <div class="form-group horizontal">
+                                      
+                  
+                    <input type="text" class="form-control" placeholder="busca..." name ="valor" style="width: 200px;margin-right: 10px;" required/>
+                   
+                  <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"> Filtrar</i></button></td>
+                   <a class="btn btn-info" href="{{ path('search') }}" style="margin-left: 3px;">
+                                <i class="glyphicon glyphicon-refresh"></i>
+                              
+                        </a>
+                   
+        </div> 
+        
+            </form>           
+              
+                   <br/>
+                    {% for flashMenssage in app.session.flashbag.get('messagem') %}
+                           <div class="alert alert-success" style="text-align: center; font-size: 20px"> 
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>{{ flashMenssage }}</strong>
+                           </div>
+                     {% endfor %}
+                     {% for flashMenssage in app.session.flashbag.get('message1') %}
+                           <div class="alert alert-error" style="text-align: center; font-size: 20px; color: red; float: auto   ;"> 
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>{{ flashMenssage }}</strong>
+                           </div>
+                    {% endfor %}
+               
+      
+                     
+      
+             
+        
+        
+       
+
+        </div>
+
+
+       
+    
+  <h2 class="sub-header" style="text-align:center">Resultado</h2>
+  <br/>
+  <p>
+  
+ 
+
+  <div class="table-responsive" id="page-selection">
+  
+    <table class="table"  >
+   
+        <thead>
+            <tr>
+               
+                <th> Status </th>
+                <th> Ip </th> 
+                 <th> Mac </th> 
+                    
+                <!--<th>Tipo</th>
+                <th>Patrimoniolocal</th>-->
+                <th>Laboratorio</th>
+                <!--<th>Localsala</th>
+                <th>Email</th>
+                <th>Ramal</th>
+                <th>Celular</th>
+                <th>Responsavel</th>-->               
+                <th >Data cadastro</th>
+                <th >Data DHCPlog</th>
+                
+                <th colspan="3" style="text-align:center;"> Ação</th>
+            </tr>
+        </thead>
+        <tbody >
+       
+                {% for entity in entities %}
+                    <tr class="odd gradeX">     
+                      {# <td><a href="{{ path('dadosarquivos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+                     {% if entity.status == 'DESBLOQUEADO' %}
+                        
+                         <td class="center" > <h4><span class="label label-success">{{ entity.status}}</span></h4></td>
+                      {% else %}
+                        
+                        <td class="center" > <h4><span class="label label-danger">{{ entity.status}}</span></h4></td>
+
+                      {% endif %}
+                       
+
+                      
+                        <td class="center">{{ entity.ip }}</td>                            
+                        <td class="center">{{ entity.mac }}</td>
+                        
+                        <td class="center">{{ entity.laboratorio }}</td>
+                        {#<td class="center">{{ entity.email }}</td>
+                        <td class="center">{{ entity.ramal }}</td>
+                        <td class="center">{{ entity.celular }}</td>
+                        <td class="center">{{ entity.responsavel }}</td>#}
+                       
+                        <td class="center" >{% if entity.dataCadastro %}{{ entity.dataCadastro|date('d-m-y') }}{% endif %}</td>
+                        <td class="center" >{% if entity.datadhcplog %}{{ entity.datadhcplog|date('d-m-y') }}{% endif %}</td>
+
+                                    
+                        <td><a class="btn btn-default" href="{{ path('dadosarquivos_show', { 'id': entity.id }) }}">Detales <i class="glyphicon glyphicon-zoom-in icon-white"></i></a></td>                 
+                        
+                            
+                        
+                    </tr>
+                {% endfor %}
+
+        </tbody>
+      
+    </table>
+    {# display navigation #}
+   
+   <br> 
+   </div>
+   </div>
+   
+   <br>
+  {% block javascript %}
+   {{ parent()}}
+   <script>
+        // init bootpag
+        $('#page-selection').bootpag({
+            total: 10
+        }).on("page", function(event, /* page number here */ num){
+             $("#content").html("Insert content"); // some ajax content loading...
+        });
+    </script>
+   {% endblock javascript %}
+
+       
+    {% endblock %}
+  

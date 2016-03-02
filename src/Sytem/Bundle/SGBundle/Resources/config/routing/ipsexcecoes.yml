@@ -1,0 +1,30 @@
+ipsexcecoes:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Ipsexcecoes:index" }
+
+ipsexcecoes_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Ipsexcecoes:show" }
+
+ipsexcecoes_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Ipsexcecoes:new" }
+
+ipsexcecoes_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Ipsexcecoes:create" }
+    requirements: { _method: post }
+
+ipsexcecoes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Ipsexcecoes:edit" }
+
+ipsexcecoes_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Ipsexcecoes:update" }
+    requirements: { _method: post|put }
+
+ipsexcecoes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Ipsexcecoes:delete" }
+    requirements: { _method: post|delete }

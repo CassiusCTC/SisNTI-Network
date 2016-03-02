@@ -1,0 +1,39 @@
+solicitacoes:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:index" }
+
+solicitacoes_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:show" }
+
+solicitacoes_view:
+    path:     /{id}/view
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:view" }
+
+#solicitacoes_new:
+    #path:     /new
+    #defaults: { _controller: "SytemSGBundle:Solicitacoes:new" }
+
+solicitacoes_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:create" }
+    requirements: { _method: post }
+
+#solicitacoes_edit:
+    #path:     /{id}/edit
+    #defaults: { _controller: "SytemSGBundle:Solicitacoes:edit" }
+
+#solicitacoes_update:
+    #path:     /{id}/update
+    ##defaults: { _controller: "SytemSGBundle:Solicitacoes:update" }
+    #requirements: { _method: post|put }
+
+solicitacoes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:delete" }
+    requirements: { _method: post|delete }
+
+solicitacoes_indeferir:
+    path:     /{id}/indeferir
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:indeferir" }
+    requirements: { _method: post}

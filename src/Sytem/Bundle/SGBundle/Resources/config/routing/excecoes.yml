@@ -1,0 +1,30 @@
+excecoes:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Excecoes:index" }
+
+excecoes_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Excecoes:show" }
+
+excecoes_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Excecoes:new" }
+
+excecoes_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Excecoes:create" }
+    requirements: { _method: post }
+
+excecoes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Excecoes:edit" }
+
+excecoes_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Excecoes:update" }
+    requirements: { _method: post|put }
+
+excecoes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Excecoes:delete" }
+    requirements: { _method: post|delete }

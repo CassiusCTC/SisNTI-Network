@@ -1,0 +1,30 @@
+intervalosips:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Intervalosips:index" }
+
+intervalosips_show:
+    path:     /{id}/show
+    defaults: { _controller: "SytemSGBundle:Intervalosips:show" }
+
+intervalosips_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Intervalosips:new" }
+
+intervalosips_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Intervalosips:create" }
+    requirements: { _method: post }
+
+intervalosips_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Intervalosips:edit" }
+
+intervalosips_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Intervalosips:update" }
+    requirements: { _method: post|put }
+
+intervalosips_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Intervalosips:delete" }
+    requirements: { _method: post|delete }

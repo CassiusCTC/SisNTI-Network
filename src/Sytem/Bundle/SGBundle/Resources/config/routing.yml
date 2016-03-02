@@ -1,0 +1,263 @@
+sytem_sg_homepage:
+    path:     /hellow
+    defaults: { _controller: SytemSGBundle:Default:index }
+
+SytemSGBundle_servidorldap:
+    resource: "@SytemSGBundle/Resources/config/routing/servidorldap.yml"
+    prefix:   /admin/servidorldap
+
+SytemSGBundle_tipos:
+    resource: "@SytemSGBundle/Resources/config/routing/tipos.yml"
+    prefix:   /admin/tipos
+
+SytemSGBundle_excecoes:
+    resource: "@SytemSGBundle/Resources/config/routing/excecoes.yml"
+    prefix:   /admin/excecoes
+
+SytemSGBundle_ipsexcecoes:
+    resource: "@SytemSGBundle/Resources/config/routing/ipsexcecoes.yml"
+    prefix:   /admin/ipsexcecoes
+
+SytemSGBundle_dhcpconf:
+    resource: "@SytemSGBundle/Resources/config/routing/dhcpconf.yml"
+    prefix:   /admin/dhcpconf
+
+SytemSGBundle_laboratorios:
+    resource: "@SytemSGBundle/Resources/config/routing/laboratorios.yml"
+    prefix:   /admin/laboratorios
+
+SytemSGBundle_arquivosremotos:
+    resource: "@SytemSGBundle/Resources/config/routing/arquivosremotos.yml"
+    prefix:   /admin/arquivosremotos
+
+SytemSGBundle_dnsips:
+    resource: "@SytemSGBundle/Resources/config/routing/dnsips.yml"
+    prefix:   /admin/dnsips
+
+SytemSGBundle_dadosarquivos:
+    resource: "@SytemSGBundle/Resources/config/routing/dadosarquivos.yml"
+    prefix:   /admin/dadosarquivos
+
+SytemSGBundle_intervalosips:
+    resource: "@SytemSGBundle/Resources/config/routing/intervalosips.yml"
+    prefix:   /admin/intervalosips
+
+SytemSGBundle_solicitacoes:
+    resource: "@SytemSGBundle/Resources/config/routing/solicitacoes.yml"
+    prefix:   admin/solicitacoes
+
+SytemSGBundle_admins:
+    resource: "@SytemSGBundle/Resources/config/routing/admins.yml"
+    prefix:   /admin/admins
+
+SytemSGBundle_grupos:
+    resource: "@SytemSGBundle/Resources/config/routing/grupos.yml"
+    prefix:   /admin/grupos
+
+#SytemSGBundle_grupospermitidos:
+    #resource: "@SytemSGBundle/Resources/config/routing/grupospermitidos.yml"
+   # prefix:   /admin/grupospermitidos
+
+homeadmin:
+    path:     /admin/homeadmin
+    defaults: { _controller: SytemSGBundle:HomeAdmin:homeadmin }
+
+useradmin:
+    path:     user/useradmin
+    defaults: { _controller: SytemSGBundle:Useradmin:useradmin }
+
+#configfile:
+    #path:     /admin/configfile
+    #defaults: { _controller: SytemSGBundle:ConfigFile:configfile }
+
+configpassword:
+    path:     /admin/configpassword
+    defaults: { _controller: SytemSGBundle:ConfigFile:configpassword }
+
+dhcplogview:
+    path:     /admin/dhcplogview
+    defaults: { _controller: SytemSGBundle:DHCPLog:dhcplogview }
+
+#atualisafile:
+    #path:     /admin/atualisafile
+    #defaults: { _controller: SytemSGBundle:ConfigFile:atualisafile }
+    #requirements: { _method: post}
+
+atualisadminmaster:
+    path:     /admin/atualisadminmaster
+    defaults: { _controller: SytemSGBundle:ConfigFile:atualisadminmaster }
+    requirements: { _method: post}
+
+exportar:
+    path:     /admin/exportar
+    defaults: { _controller: SytemSGBundle:ExportaCsv:exportar }
+
+exportarcsv:
+    path:     /admin/exportarcsv
+    defaults: { _controller: SytemSGBundle:ExportaCsv:exportarcsv }
+    requirements: { _method: get}
+
+upload:
+    path:     /admin/upload
+    defaults: { _controller: SytemSGBundle:ImportarCsv:upload}
+
+importar:
+    path:     /admin/importar
+    defaults: { _controller: SytemSGBundle:ImportarCsv:importar }
+    requirements: { _method: post}
+
+login:
+    path:     /
+    defaults: { _controller: SytemSGBundle:Login:login }
+
+search_ip:
+    path:     /admin/search_ip
+    defaults: { _controller: "SytemSGBundle:BuscaDados:search_ip" }
+    requirements: { _method: post}
+
+
+login_check:
+    path:     /login_check
+    #defaults: { _controller: "SytemSGBundle:Login:login_check" }
+    #requirements: { _method: post}
+
+sair:
+    path:     /sair
+    defaults: { _controller: "SytemSGBundle:Login:sair" }
+
+resultupdateview:
+    path:     /admin/resultupdateview
+    defaults: { _controller: "SytemSGBundle:DHCPLog:resultupdateview" }
+
+search_desbloqueado:
+    path:     /admin/search_desbloqueado
+    defaults: { _controller: "SytemSGBundle:BuscaDados:search_desbloqueado" }
+
+search_bloqueado:
+    path:     /admin/search_bloqueado
+    defaults: { _controller: "SytemSGBundle:BuscaDados:search_bloqueado" }
+
+search_externo:
+    path:     /admin/search_externo
+    defaults: { _controller: "SytemSGBundle:BuscaDados:search_externo" }
+
+search:
+    path:     /admin/search
+    defaults: { _controller: "SytemSGBundle:BuscaDados:search" }
+
+search_server:
+    path:     /admin/search_server
+    defaults: { _controller: "SytemSGBundle:BuscaDados:search_server" }
+
+search_solicitacoes:
+    path:     /admin/search_solicitacoes
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:search_solicitacoes" }
+
+search_indeferidos:
+    path:     /admin/search_indeferidos
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:search_indeferidos" }
+
+search_notificacoes:
+    path:     /admin/search_notificacoes
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:search_notificacoes" }
+
+newsolicitacao:
+    path:     /user/newsolicitacao
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:newsolicitacao" }
+
+search_user:
+    path:     /user/search_user
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:search_user" }
+
+connected:
+    path:     /admin/connected
+    defaults: { _controller: "SytemSGBundle:DHCPLog:connected" }
+
+noconnected:
+    path:     /admin/noconnected
+    defaults: { _controller: "SytemSGBundle:DHCPLog:noconnected" }
+
+poucoconnected:
+    path:     /admin/poucoconnected
+    defaults: { _controller: "SytemSGBundle:DHCPLog:poucoconnected" }
+
+create:
+    path:     /user/create
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:create" }
+    requirements: { _method: post }
+
+error:
+    path:     /error
+    defaults: { _controller: "SytemSGBundle:Default:error" }
+
+edituser:
+    path:     /user/{id}/edituser
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:edituser" }
+
+updateuser:
+    path:     /user/{id}/updateuser
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:updateuser" }
+    requirements: { _method: post|put }
+
+atualizaNotificacoes:
+    path:     /admin/atualizaNotificacoes
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:atualizaNotificacoes" }
+
+forcedowload:
+    path:     /admin/{id}/{flag}/forcedowload/
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:forcedowload" }
+
+#forcedownloads:
+    #path:     /admin/{id}/forcedownloads
+    #defaults: { _controller: "SytemSGBundle:DadosArquivos:forcedownloads" }
+
+searchCpf:
+    path:     /admin/{flag}/searchCpf
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:searchCpf" }
+    requirements: { _method: post }
+
+consultagrupo:
+    path:     /admin/consultagrupo
+    defaults: { _controller: "SytemSGBundle:Grupos:consultagrupo" }
+    requirements: { _method: post }
+
+searchCpfuser:
+    path:     /user/searchCpfuser
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:searchCpfuser" }
+    requirements: { _method: post }
+
+exclusaoMAC:
+    path:     /admin/exclusaoMAC
+    defaults: { _controller: "SytemSGBundle:DadosArquivos:exclusaoMAC" }
+
+solicitaExclusao:
+    path:     /user/{mac}/solicitaExclusao
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:solicitaExclusao" }
+
+search_apagar:
+    path:     /admin/search_apagar
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:search_apagar" }
+
+search_usernovanotificacao:
+    path:     /user/search_usernovanotificacao
+    defaults: { _controller: "SytemSGBundle:Solicitacoes:search_usernovanotificacao" }
+
+contatoRequisicao:
+    path:     /contatoRequisicao
+    defaults: { _controller: "SytemSGBundle:Login:contatoRequisicao" }
+
+informacoes:
+    path:     /informacoes
+    defaults: { _controller: "SytemSGBundle:Login:informacoes" }
+
+email:
+    path:     /email
+    defaults: { _controller: "SytemSGBundle:Default:email" }
+
+contato:
+    path:     /contato
+    defaults: { _controller: "SytemSGBundle:Login:contato" }
+
+tutorial:
+    path:     /user/tutorial
+    defaults: { _controller: "SytemSGBundle:Default:tutorial" }

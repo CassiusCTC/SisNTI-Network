@@ -1,0 +1,136 @@
+{% extends 'SytemSGBundle:Default:baseSolicitacoes.html.twig' %}
+
+
+
+{# block col %}
+
+{% endblock col #}
+{% block body -%}
+<br>
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">Home SysNTI - NetManager</a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Gerenciar MAC 
+                                    </li>
+   </ol>
+    
+<div class='table-responsive'>
+<div class="row">
+ <div  class="col-sm-12" >
+     <h2 class="sub-header" style="text-align:center;">
+     {{ status }}</h2>
+     <br>
+ 
+    
+
+     {% for flashMenssage in app.session.flashbag.get('message') %}
+        <div class="alert alert-info" style="text-align: center;"> 
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ flashMenssage }}</strong>
+      </div>
+     {% endfor %} 
+  
+      {# total items count #}
+    <div class="count">
+        <h4><strong>Número de Mac's gerenciados  </strong> <SPAN STYLE=" font-weight: bold;" class="badge">{{ pagination | length }}</SPAN></h4>
+
+    </div><br>
+    
+  
+    <table id="listar" class="table"  >
+        <thead>
+            <tr class="info">
+                <th> Status</th>
+                <th> Ip </th> 
+                <th> Mac</th> 
+                <th> Laboratorio </th>
+                <th>Responsavel</th>
+                <th> Data cad</th>
+                <th > Ações</th>
+            </tr>
+        </thead>
+        <tbody >
+       
+                {% for entity in pagination %}
+                {% if entity.mac in flag %}                    
+                     <td><h4><span class="label label-danger">Exclusão em andamento</span></h4></td>
+                {% elseif entity.mac in flag1 %}
+                     <td><h4> <span class="label label-warning">Atualização em andamento</span></h4></td>
+                {% else %}
+                    <tr class="odd gradeX"> 
+                      {% if entity.status == 'DESBLOQUEADO' %}
+                         
+                         <td class="center" > <h4><span class="label label-success">{{ entity.status}}</span></h4></td>
+                      {% else %}
+                        
+                        <td class="odd gradeX" > <h4><span class="label label-danger">{{ entity.status}}</span></h4></td>
+
+                      {% endif %}
+                  {% endif %}      
+
+                      
+                        <td class="center">{{ entity.ip }}</td>
+                        <td class="center">{{ entity.mac }}</td>
+                        <td class="center">{{ entity.laboratorio }}</td>
+                        <td class="center">{{ entity.responsavel }}</td>
+                        <td class="center" >
+                          {% if entity.dataCadastro %}
+                          {{ entity.dataCadastro|date('d-m-Y') }}
+                          {% endif %}
+                        </td>
+                
+                 
+
+                   {% if entity.mac in flag %}                    
+                     {#<td><h4><span class="label label-danger">Exclusão em andamento</span></h4></td>#}
+                     <td><a class="btn btn-info" disabled="true" href="{{ path('edituser', { 'id': entity.id }) }}"> <i class="glyphicon glyphicon-edit icon-white"></i> Editar </a></td>
+                   {% elseif entity.mac in flag1 %}
+                     {#<td><h4> <span class="label label-warning">Atualização em andamento</span></h4></td>#}
+                      <td><a class="btn btn-info" disabled="true" href="{{ path('edituser', { 'id': entity.id }) }}"> <i class="glyphicon glyphicon-edit icon-white"></i> Editar </a></td>
+                   {% else %}
+                   <td><a class="btn btn-info"  href="{{ path('edituser', { 'id': entity.id }) }}"> <i class="glyphicon glyphicon-edit icon-white"></i> Editar </a></td>
+                      
+                   {% endif %}
+                  
+                  
+                  </tr>   
+                {% endfor %}
+
+        </tbody>
+    </table>
+  
+   </div>
+   </div>
+   </div>
+   </div></div>
+  
+    <br/>
+
+
+       
+    {% endblock %}
+  {% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px; color:blue;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+</script>
+
+
+{% endblock %}

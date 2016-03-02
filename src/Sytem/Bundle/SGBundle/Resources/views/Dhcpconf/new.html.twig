@@ -1,0 +1,86 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav"> 
+           
+            <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>               
+          
+      
+            <li><a href="{{ path('dhcpconf') }}"><i class="glyphicon glyphicon-chevron-left"></i> <strong>Subnet dhcp</strong></a></li>
+            <li><a href="{{ path('dnsips') }}"> <strong>Dns</strong></a></li> 
+               
+    </ul>
+</div>
+{% endblock col #}
+
+{% block body -%}
+
+<ol class="breadcrumb">
+                                    <li>
+                                       <a href="{{ path('homeadmin') }}">SysNTI - NetManager Administrador</a>
+                                       
+                                    </li>
+                                    <li><a href="{{ path('dhcpconf') }}">
+                                         Subnet dhcp.conf</a>
+                                   </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> / Cadastrar Subnet dhcp.conf
+                                    </li>
+</ol>
+<div class="panel panel-primary" style="background-color:#FAFAFA">
+<div class="panel-heading" style="font-size:18px"><strong>Cadastrar Subrede (dhcp.conf)</strong>
+</div>
+ <div class="panel-body">
+    <div class="alert alert-info"> <p style="text-align:center; font-size:16px;"><strong> Obs: Todos os campos com asterisco são de preenchimento obrigatorio.<br>Ex: subnet 200.239.152.0 netmask 255.255.252.0 { option routers 200.239.152.2; }</strong> </p>
+    </div>
+ 
+ 
+    <br/>
+<div class="table-responsive">
+<div class="row" >  
+ <div  class="col-sm-12" > 
+    {{ form_start(form) }}
+     <div class="form-group">
+     <div class="col-sm-12">     
+      <span>{{ form_errors(form.optionrouters) }}</span>
+      <div class="input-group">
+        <span class="input-group-addon"><b>Informe as configuração da Sunet *</b></span>
+        
+         {{ form_widget (form.optionrouters, {'attr': {'class':'form-control','style':'resize:none'}})}}
+      </div>
+  </div>
+
+</div> 
+
+<div class="form-group">
+     <div class="col-sm-12">   
+       <br>
+    	   {{ form_widget (form.submit, {'attr': {'class':'btn btn-primary btn-lg active'}})}}
+         
+         <button class="btn btn-default btn-lg" type="reset">Cancelar</button>
+     </div>
+</div>
+     
+    {{ form_end(form) }}
+    </div>
+ 
+ 
+  </div>
+  </div>
+	 </div></div>
+ 
+   <script type="text/javascript">
+        
+
+        $(document).ready(function(){
+             // way 1
+            $('.ip_address').mask('099.099.099');
+            // way 2
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+            
+        );
+  
+    </script>
+
+
+{% endblock %}

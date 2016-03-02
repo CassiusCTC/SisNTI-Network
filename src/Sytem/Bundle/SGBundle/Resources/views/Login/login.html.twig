@@ -1,0 +1,64 @@
+ 
+ {% extends 'SytemSGBundle:Default:baseLogin.html.twig' %}
+
+
+ {% block container %}
+ <br> <br>
+  <div class=" row" style="margin-top:40px">
+      <div class="col-sm-8 col-md-5 col-md-offset-4">
+        
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center"> <strong style="color:grey"> Login - Nti</strong> </div>
+            </div>     
+
+        <div class="panel-body" >
+     
+            <form role="form"  method="POST" action="{{ path('login_check') }} " id="login" >
+            <br>
+            <div class="row" style="text-align:center">
+                  <div class="center-block">
+                    <center><img class="img-responsive" WIDTH="340"
+                      src="{{ asset('bundles/sytemsg/images/decealogo.jpg') }}" alt=""></center>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                    <div class="form-group">
+                  
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" id="username" name="_username" class="form-control" placeholder="Cpf"  required autofocus/></div>
+                    </div>
+                  <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required/>
+                  </div><br>
+                  <div class="col-lg-9">
+                  {% if error %}
+                      <div><p class ="help-block" style="color:blue;">{{ error.message }}</p></div>
+
+                  {% endif %}
+                   
+                             
+                  </div>
+                 
+                   <button   class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+                   <button class="btn btn-lg btn-default btn-block" type="reset">Limpar</button>
+                   <br>
+                
+            </form>
+        
+  </div></div>
+  </div>
+  </div>
+   </div></div></div>
+  
+  
+  <br>
+  <br>
+  
+
+{% endblock container %}

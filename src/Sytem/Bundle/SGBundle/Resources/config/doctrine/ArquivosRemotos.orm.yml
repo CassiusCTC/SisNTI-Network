@@ -1,0 +1,53 @@
+Sytem\Bundle\SGBundle\Entity\ArquivosRemotos:
+    type: entity
+    table: arquivos_remotos
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        serverip:
+            type: string
+            nullable: true
+            length: 15
+            fixed: false
+            comment: ''
+        nomeArquivo:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+            column: nome_arquivo
+        username:
+            type: string
+            nullable: true
+            length: 20
+            fixed: false
+            comment: ''
+        password:
+            type: string
+            nullable: true
+            length: 20
+            fixed: false
+            comment: ''
+        caminhoDestino:
+            type: string
+            nullable: false
+            length: 200
+            fixed: false
+            comment: ''
+            column: caminho_destino
+        caminhoOrigem:
+            type: string
+            nullable: false
+            length: 200
+            fixed: false
+            comment: ''
+            column: caminho_origem
+    lifecycleCallbacks: {  }

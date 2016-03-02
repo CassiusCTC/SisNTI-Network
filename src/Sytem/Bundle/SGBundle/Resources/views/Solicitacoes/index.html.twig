@@ -1,0 +1,131 @@
+{% extends 'SytemSGBundle:Default:baseAdmin.html.twig' %}
+
+
+
+{# block col %}
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+    <ul class="nav navbar-nav side-nav">
+      <li><a href="{{ path('homeadmin') }}"><strong><i class="glyphicon glyphicon-home"></i> Home Administrador</strong></a></li>
+      
+      <li><a href="{{ path('search_solicitacoes') }}"><strong>Status Solicitações </strong>  <i class="glyphicon glyphicon-zoom-in icon-white"></i></a></li>
+            
+            
+   </ul>
+</div>
+{% endblock col #}
+
+
+
+{% block body -%}
+    <ol class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="#">SysNTI - NetManager Adminstrador</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-fw fa-table"></i> Requisições de MAC.
+                                    </li>
+   </ol>
+  
+ 
+  
+  <div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3><strong>Solicitações</strong> 
+  </h4></div>
+  <div class="panel-body">
+  <div class="count">
+        <h4><strong>Número de registros</strong> - <SPAN STYLE="color:#00008B; font-weight: bold;">{{ pagination|length }}</SPAN>
+  </h4></br>
+   <div class="alert alert-info" role="alert"> 
+    <p>
+      <h4> <strong>Aqui são exibidas as solicitações de Mac feitas pelos usuarios, onde os mesmos seram avaliados, e como resultado haveram duas possibilidades (deferidos ou indeferidos).</strong>
+      </h4>
+    </p></div>
+   </div>
+   <div class="alert alert-info" style="text-align: center; font-size: 15px;"> 
+    {% for flashMenssage in app.session.flashbag.get('message') %}      
+            <strong>{{ flashMenssage }}</strong>      
+    {% endfor %} 
+  </div>
+
+  
+    <br>
+    <div class="table-responsive"> 
+     <div class="col-xs-12"> 
+    <table id="listar" class="table">
+        <thead>
+            <tr class="info">
+                <th>Status</th>
+                 <th> Mac</th> 
+                 <th> Tipo</th>              
+                
+                <th> Responsavel</th> 
+               
+                <th> Data cad</th>
+
+                <th > Ações</th>
+            </tr>
+        </thead>
+        <tbody >
+           
+                {% for entity in pagination %}
+                    <tr class="odd gradeX">   
+                   
+                      <td class="center" > <h4><span class="label label-default">
+                      {{ entity.avaliacao }}</span></h4></td>
+                
+                        <td class="center">{{ entity.mac }}</td>
+                        <td class="center">{{ entity.tipo }}</td>   
+                           
+                       <td class="center"> {{ entity.responsavel }} </span></td>
+                        <td class="center" >
+                          {% if entity.dataSolicitacao %}
+                          {{ entity.dataSolicitacao|date('d-m-Y') }}
+                          {% endif %}
+                        </td>
+                        
+                        <td><a class="btn btn-success" href="{{ path('dadosarquivos_newdeferido', { 'id': entity.id }) }}"><i class="glyphicon glyphicon-ok icon-white"></i> Deferir</a>                
+                       <a class="btn btn-danger" href="{{ path('solicitacoes_show',{ 'id': entity.id }) }}"><i class="glyphicon glyphicon-remove icon-white"></i> Indeferir</a></td> 
+                            
+                        
+                    </tr>
+
+                   
+                {% endfor %}
+
+        </tbody>
+    </table><br>
+   </div>
+   </div>
+   </div>
+   </div>
+
+    
+    <br/>
+
+
+       
+    {% endblock %}
+{% block scriptsextra %}
+<script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery-1.10.2.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/jquery.dataTables.min.js')}}"></script>
+       <script type="text/javascript" language="javascript" src="{{ asset('bundles/sytemsg/datatable/js/dataTables.bootstrap.js')}}"></script>
+       <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            $('#listar').dataTable({
+          "language": {
+            "lengthMenu": "<b>Número _MENU_ de itens por página</b>",
+            "zeroRecords": "<span class='label label-info' style='font-size:13px'>Nenhum resultado foi encontrado.</span>",
+            "info": "<b>Página</b> <SPAN class='badge'> _PAGE_ </SPAN><b> de </b><SPAN class='badge'> _PAGES_</SPAN>",
+            "infoEmpty": "<span class='label label-default' style='font-size:13px'>Nenhum resultado disponivel.</span>",
+            "infoFiltered": "<span class='label label-info' style='font-size:13px; color:blue;'>( filtro <b> _MAX_ </b> total )</span>",
+            "search": "<b>Buscar: </b>",
+            "paginate": { "first": "Início", "previous": "Anterior", "next": "Próximo", "last": "Último" }
+           }
+          });
+          } );
+       </script>
+
+
+{% endblock %}

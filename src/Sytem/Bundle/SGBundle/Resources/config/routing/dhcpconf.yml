@@ -1,0 +1,30 @@
+dhcpconf:
+    path:     /
+    defaults: { _controller: "SytemSGBundle:Dhcpconf:index" }
+
+#dhcpconf_show:
+    #path:     /{id}/show
+    #defaults: { _controller: "SytemSGBundle:Dhcpconf:show" }
+
+dhcpconf_new:
+    path:     /new
+    defaults: { _controller: "SytemSGBundle:Dhcpconf:new" }
+
+dhcpconf_create:
+    path:     /create
+    defaults: { _controller: "SytemSGBundle:Dhcpconf:create" }
+    requirements: { _method: post }
+
+dhcpconf_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "SytemSGBundle:Dhcpconf:edit" }
+
+dhcpconf_update:
+    path:     /{id}/update
+    defaults: { _controller: "SytemSGBundle:Dhcpconf:update" }
+    requirements: { _method: post|put }
+
+dhcpconf_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SytemSGBundle:Dhcpconf:delete" }
+    requirements: { _method: post|delete }
